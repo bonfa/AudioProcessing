@@ -1,21 +1,53 @@
-%%2-Basic tone and noise synthesis%
+%% 2-Basic tone and noise synthesis%%
 clear all
 close all
 clc
-    
-%Crea un rumore bianco di 10sec, lo suona e lo salva in un file
-    y = rand([1,10000],'double');
-    plot(y)
-    %sound(y)
-    wavwrite(y,'noise.wav');
 
-%Create a sound  of length d sec with a simple sinusoid s(t)=sin(2pif)%
-%     t = 0:0.00001:10;
-%     f0 = 0.44;
-% 
-%     T = 1.0/f0;
-% 
-%     s = sin((2*pi*f0)*t);
-%     plot(s)
-%     %sprintf 'suono la sinusoide\n'
-%     sound(s)
+
+
+%% Crea un rumore bianco di 10sec, lo suona e lo salva in un file
+%     text = sprintf('White Noise');
+%     display(text);
+%     t = [0:0.1:6000];
+%     y = rand(size(t));
+%     axes = [0 6000 -2 2]
+%     plot(t,y);
+%     sound(y);
+%     wavwrite(y,'noise.wav');
+
+
+
+%%
+% Crea e suona una sinusoide di 6 secondi con diverse frequenze di
+% campionamento
+%   il tempo è in millisecondi
+%   la frequenza è in kHz
+
+% %    frequenzaCampionamento = 8;
+% %    frequenzaCampionamento = 22.05; 
+    frequenzaCampionamento = 44.1;
+    
+    dt = 1/frequenzaCampionamento;
+    t = 0:dt:6000;
+    f0 = 0.44;
+    s = sinusoide(t,1,f0);
+%     plot(s);
+%     axis([0 6000 -2 2]);
+%     sprintf 'suono la sinusoide\n'
+%     sound(s,frequenzaCampionamento*1000);
+
+% Si dovrebbe sentire che, diminuendo la frequenza di campionamento,
+% il suono diventa più cupo. (???) Questo perchè vengono perse della armoniche
+% durante il campionamento
+
+
+
+%% Esperimenti Con i Beats
+% Sintetizzazione di un tono formato da due sinusoidi con frequenze diverse
+% con differenza inferiore a 10 per sentire i beats.
+% Poi aumentare la frequenza progressivamente fino a evitare i beats
+k = 1;
+s1 = sinusoideFreqVariabile(t,1,f0,k);
+plot(t,s1);
+axis([0 6000 -2 2]);
+soundsc(s1);
