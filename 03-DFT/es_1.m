@@ -41,24 +41,23 @@ for i=1:20,
 end
 %%s
 
-
 %%calcolo la fft normale
 spettro = fft(s);
 figure();
-plot(1:20,spettro);
+plot(0:1/19:1,20.*log(10).*abs(spettro));
 title('FFT');
 
 %% calcolo la fft
 %%1) con 10 campioni in frequenza  ---> s viene troncato a 10
 spettro = fft(s,10);
 figure();
-plot(1:10,spettro);
+plot(0:1/9:1,20.*log(10).*abs(spettro));
 title('FFT - dieci campioni');
 
 %%2) con 40 campioni in frequenza ---> s viene paddato alla fine
 spettro = fft(s,40);
 figure();
-plot(1:40,spettro);
+plot(0:1/39:1,20.*log(10).*abs(spettro));
 title('FFT - 40 campioni');
 
 %%3) aggiungo uno zero dopo ciascun campione 
@@ -66,15 +65,15 @@ title('FFT - 40 campioni');
 q = zeros(1,40);
 for i=1:40,
     if (mod(i+1,2) == 0)
-        q(i) = s((i+1)/2)
+        q(i) = s((i+1)/2);
     else
         q(i) = 0;
     end    
 end
 spettro = fft(q,40);
 figure();
-plot(1:40,spettro);
-title('Um campione nullo e uno originale');
+plot(0:1/39:1,20.*log(10).*abs(spettro));
+title('FFT - Segnale scalato di un fattore 2 - non interpolato');
 
 %%4)  interpolazione di fattore 2
 %%nuova sequenza
@@ -82,5 +81,7 @@ r = interp(s,2);
 
 spettro = fft(r,40);
 figure();
-plot(1:40,spettro);
-title('Interpolazione di un fattore due');
+plot(0:1/39:1,20.*log(10).*abs(spettro));
+title('FFT - Segnale scalato di un fattore 2 - interpolato');
+
+%%
