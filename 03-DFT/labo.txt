@@ -1,0 +1,41 @@
+il filtraggio di solito si effettua con la convoluzione
+
+Per problemi di prestazioni:
+si divide il segnale in segmenti,
+si padda con zero padding ciascun segmento,
+si filtra,
+poi si somma al risultato di ciascuna convoluzione con le code del precedente.
+
+Con la fft, bisogna paddare in modo da evitare la convoluzione circolare.
+
+
+
+SHORT TIME FOURIER TRANSFORM
+spettrogramma segnale
+   f|
+	|
+	|
+	|
+	|_____________
+				t
+				
+divido il segnale in finestre che spesso sono overlappate
+|------------------|
+| segnale          |   
+|------------------|	
+
+divido in campioni overlappati
+----------
+----------
+      -----------
+      -----------
+	         -----------
+			 -----------
+			 
+ciascun campione va a posizionarsi nello spettro del segnale nella posizione corrispondente			 
+f|
+	||
+	||||
+	|||||
+	|||||__________
+				t
