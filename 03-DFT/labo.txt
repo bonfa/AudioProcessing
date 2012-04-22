@@ -12,7 +12,7 @@ Con la fft, bisogna paddare in modo da evitare la convoluzione circolare.
 
 SHORT TIME FOURIER TRANSFORM
 spettrogramma segnale
-   f|
+       f|
 	|
 	|
 	|
@@ -33,9 +33,9 @@ divido in campioni overlappati
 			 -----------
 			 
 ciascun campione va a posizionarsi nello spettro del segnale nella posizione corrispondente			 
-f|
+       f|
 	||
 	||||
 	|||||
 	|||||__________
-				t
+		       t
