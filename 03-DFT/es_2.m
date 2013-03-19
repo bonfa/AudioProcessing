@@ -68,56 +68,21 @@ title('convoluzione - tramite fft');
 wavwrite(c_fft,22050,'conv_fft.wav');
 
 close all;
+
 % Terzo metodo - Overlap ADD
-% Il metodo serve per CALCOLARE VELOCEMENTE LA CONVOLUZIONE TRA UN SEGNALE
-% E UN FILTRO FIR.
-% L'algoritmo è il seguente:
-% 1) si divide il segnale in intervalli (L = 64)
-% 2) si calcola la fft del filtro con N desiderato (N = length(s)+length(h)) 
-% 2.1) si prepara un vettore che conterrà il risultato della convoluzione
-% 3) per ciascun intervallo:
-% 4)    si calcola la fft dell'intervallo
-% 5)    si moltiplica il risultato con la fft del filtro
-% 6)    si antitrasforma
-% 7)    si somma il risultato dell'anti trasformata al segnale y nella
-%           posizione opportuna. (In particolare, il segnale y non è
-%           nullo, ma contiene una parte del risultato della convoluzione
-%           tra l'intervallo precedente e il filtro. Questo è dovuto al
-%           fatto che il risultato della convoluzione ha supporto maggiore
-%           del segnale in ingresso).
-% 
-% Di fatto questo metodo applica il procedimento fft - prodotto fft inversa
-% su segmenti ridotti del segnale e poi somma tutti i risultati.
-
-lunghezza_intervallo = 640;
-lunghezza_convoluzione = length(c);
-i = 1;
-y = zeros(lunghezza_convoluzione,1);
-
-while i<length(s2),
-    % prendo l'intervallo
-    estremo_inferiore_dell_intervallo = i;
-    estremo_superiore_dell_intervallo = min(estremo_inferiore_dell_intervallo + lunghezza_intervallo -1,length(s2));
-    %questo if gestisce il caso in cui la lunghezza del'intervallo sia
-    %inferiore a 640. Questo succede nell'ultimo intervallo del vettore
-    if(estremo_superiore_dell_intervallo +1 - estremo_inferiore_dell_intervallo < lunghezza_intervallo),
-        lunghezza_intervallo = estremo_superiore_dell_intervallo + 1 - estremo_inferiore_dell_intervallo;
-    end
-    intervallo_del_segnale = s2(estremo_inferiore_dell_intervallo:estremo_superiore_dell_intervallo);
-    % calcolo la fft, moltiplico con la risposta del filtro e antitrasformo.
-    convoluzione_sull_intervallo = ifft(fft(intervallo_del_segnale,lunghezza_convoluzione).*H');
-    % calcolo le coordinate in cui aggiungere il mio risultato in y
-    estremo_inferiore_dell_intervallo_in_y = estremo_inferiore_dell_intervallo;
-        % la convoluzione di un singolo intervallo con il filtro ha la somma
-        % dei supporti, quindi L+length(h); il resto sono zeri
-    lunghezza_filtro = number_of_samples+1;
-    estremo_superiore_dell_intervallo_in_y = min(estremo_inferiore_dell_intervallo_in_y + lunghezza_intervallo + lunghezza_filtro,lunghezza_convoluzione);
-    y(estremo_inferiore_dell_intervallo_in_y:estremo_superiore_dell_intervallo_in_y) = y(estremo_inferiore_dell_intervallo_in_y:estremo_superiore_dell_intervallo_in_y) + convoluzione_sull_intervallo(1:(estremo_superiore_dell_intervallo_in_y + 1 - estremo_inferiore_dell_intervallo_in_y));
-    i = i + lunghezza_intervallo;
-    %fprintf('%d ',i);
-end
+%non funziona non so perch�...
+lunghezza_intervallo = 64;
+y = overlap_add(s2,h,lunghezza_intervallo);
 
 figure();
-plot(y);
+plot(1:length(s2),s2);
+title('segnale');
+
+figure();
+plot(1:length(c),c,'r');
+title('concoluzione');
+
+figure();
+plot(1:length(y),y);
 title('convoluzione - overlap add');
 wavwrite(y,22050,'conv_overlap.wav');   
