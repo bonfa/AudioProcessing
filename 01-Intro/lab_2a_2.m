@@ -60,7 +60,7 @@
         
     fprintf('Suono la sinusoide a frequenza 8KHz\n');
     sound(s3,fc3);
-    
+    wavwrite(s3,'p.wav');
 %%  
 % Si dovrebbe sentire che, diminuendo la frequenza di campionamento,
 % il suono diventa più cupo. (con molta attenzione qualcosa si sente) 
