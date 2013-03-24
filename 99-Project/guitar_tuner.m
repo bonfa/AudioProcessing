@@ -8,23 +8,43 @@
 
 %}
 
+clear all
+close all
+clc
+
 
 
 % Creation of the object for the recording (creates an 8000 Hz, 8-bit,
 % 1-channel audiorecorder object)
-recorder = audiorecorder;
+sound = audiorecorder;
 
-% view the properties
-get(recorder);
+% print recorder properties
+get(sound);
+
+%add callback to show when recording starts and completes
+sound.StartFcn = 'disp(''Start playing.'')';
+%sound.StopFcn = 'disp(''End of playing.'')';
+sound.StopFcn = {@play,sound.};
 
 % first try
-disp('Start speaking.')
-recordblocking(recorder, 5);
-disp('End of Recording.');
+%recordblocking(sound,5);
+record(sound,5);
+
+
+%play(sound);
+
 % Store data in double-precision array.
-myRecording = getaudiodata(recorder);
+% myRecording = getaudiodata(recorder);
+
+%add a callback every timestamp
+%recorder.TimerFcn = {@tune_sound,myRecording};
+
+%recordblocking(recorder, 5);
+%disp('End of Recording.');
+
+
 
 % Plot the waveform.
-plot(myRecording);
+%plot(myRecording);
 
-play(recorder);
+
