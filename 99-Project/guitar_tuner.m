@@ -16,35 +16,14 @@ clc
 
 % Creation of the object for the recording (creates an 8000 Hz, 8-bit,
 % 1-channel audiorecorder object)
-sound = audiorecorder;
+recorder = audiorecorder;
 
 % print recorder properties
-get(sound);
+get(recorder);
 
 %add callback to show when recording starts and completes
-sound.StartFcn = 'disp(''Start playing.'')';
-%sound.StopFcn = 'disp(''End of playing.'')';
-sound.StopFcn = {@play,sound.};
+recorder.StartFcn = 'disp(''Start playing.'')';
 
-% first try
-%recordblocking(sound,5);
-record(sound,5);
-
-
-%play(sound);
-
-% Store data in double-precision array.
-% myRecording = getaudiodata(recorder);
-
-%add a callback every timestamp
-%recorder.TimerFcn = {@tune_sound,myRecording};
-
-%recordblocking(recorder, 5);
-%disp('End of Recording.');
-
-
-
-% Plot the waveform.
-%plot(myRecording);
-
-
+set(recorder,'TimerFcn',{@tune_sound});
+set(recorder,'TimerPeriod',3);
+record(recorder);
