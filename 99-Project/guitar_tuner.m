@@ -8,3 +8,23 @@
 
 %}
 
+
+
+% Creation of the object for the recording (creates an 8000 Hz, 8-bit,
+% 1-channel audiorecorder object)
+recorder = audiorecorder;
+
+% view the properties
+get(recorder);
+
+% first try
+disp('Start speaking.')
+recordblocking(recorder, 5);
+disp('End of Recording.');
+% Store data in double-precision array.
+myRecording = getaudiodata(recorder);
+
+% Plot the waveform.
+plot(myRecording);
+
+play(recorder);
