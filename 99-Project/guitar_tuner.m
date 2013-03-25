@@ -13,7 +13,7 @@ close all
 clc
 
 
-
+%{
 % Creation of the object for the recording (creates an 8000 Hz, 8-bit,
 % 1-channel audiorecorder object)
 recorder = audiorecorder;
@@ -28,9 +28,9 @@ recorder.StartFcn = 'disp(''Start playing.'')';
 set(recorder,'TimerFcn',{@tune_sound,fs});
 set(recorder,'TimerPeriod',6);
 record(recorder);
+%}
 
 
-%{
 fs = 8000;
 disp('Play');
 a = wavread('440.wav');
@@ -55,4 +55,3 @@ plot(audio_data_normalized);
 %normalize 
 norm_max_freq = i_max*2*1000/fs;
 disp(norm_max_freq);
-%}
