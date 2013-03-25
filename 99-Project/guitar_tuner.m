@@ -31,7 +31,10 @@ record(recorder);
 %}
 
 path = './guitar_chords/';
-note = 'A_8khz_16bps.wav';
+note = 'E_8khz_16bps.wav';
+%note = 'A_8khz_16bps.wav';
+
+
 
 %path = './';
 %note = '440.wav';
@@ -64,14 +67,21 @@ x_axis = 1:step:upper_interval_frequency;
 
 plot(x_axis(1:length(audio_data_normalized)),audio_data_normalized);
 
-[m,i_max] = max(audio_data_normalized);
+[peaks,indexes] = findpeaks(audio_data_normalized);
 
-%normalize 
-norm_max_freq = i_max*fs/(2*length(audio_data_normalized));
-disp(norm_max_freq);
+%normalize indexes
+normalixed_indexes = 
+%norm_max_freq = i_max*fs/(2*length(audio_data_normalized));
+%%disp(norm_max_freq);
 
 
 %{
+Suonando la corda del MI grave, le frequenze con i picchi sono:
+83.13 --> Mi
+165.4 --> Mi
+248.8 --> Si
+331   --> Mi
+
 Suonando la corda del LA, le frequenze con i picchi sono:
 La --> 111 hz          
 La2 --> 223.4 hz       
