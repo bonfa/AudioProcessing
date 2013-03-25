@@ -67,12 +67,26 @@ x_axis = 1:step:upper_interval_frequency;
 
 plot(x_axis(1:length(audio_data_normalized)),audio_data_normalized);
 
-[peaks,indexes] = findpeaks(audio_data_normalized);
 
-%normalize indexes
-normalixed_indexes = 
-%norm_max_freq = i_max*fs/(2*length(audio_data_normalized));
-%%disp(norm_max_freq);
+%as findpeaks on the whole vector is too expensive, we calculare the
+%indexes that represent the bound in which looking for the vector.
+
+min_freq = 50;
+max_freq = 400;
+
+min_i = round(min_freq * 2 * length(audio_data_normalized)/fs);
+max_i = round(max_freq * 2 * length(audio_data_normalized)/fs);
+
+% find the peaks in the range of defined frequences
+[peaks,indexes] = findpeaks(audio_data_normalized(min_i:max_i),'MINPEAKHEIGHT',1000,'THRESHOLD',700,'MINPEAKDISTANCE',4);
+
+% normalize indexes
+normalized_indexes = indexes*(fs/(2*length(audio_data_normalized)))+min_freq;
+
+% the frequency is the lowest
+input_freq = normalized_indexes(1);
+
+
 
 
 %{
