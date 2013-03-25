@@ -72,11 +72,10 @@ disp(norm_max_freq);
 
 
 %{
-Suonando il la le frequenze che sento sono:
-La5 --> 881 hz          |   882,3
-La6 --> 1783.8 hz       |   1785
-Mi7 --> 2647 hz         |   2648 
-La7 --> 3520 hz         |   3530
-                        |   5295
-                        |   
+Suonando la corda del LA, le frequenze con i picchi sono:
+La --> 111 hz          
+La2 --> 223.4 hz       
+Mi --> 331.3 hz         
+La4 --> 441.4 hz         
+                         
 %}
