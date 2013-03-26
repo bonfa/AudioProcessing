@@ -87,12 +87,12 @@ normalized_indexes = indexes*(fs/(2*length(audio_data_normalized)))+min_freq;
 input_freq = normalized_indexes(1);
 
 % get nearest frequency and misplacement
-
+disp(input_freq);
 [freq,distance] = get_nearest_frequency_and_distance(input_freq);
 
 % display the info
-disp(['Reference Tone [Hz]: ', freq]);
-disp(['Distance [Hz]: ', distance]);
+disp(['Reference Tone [Hz]: ', num2str(freq)]);
+disp(['Distance [Hz]: ', num2str(distance)]);
 
 %{
 Suonando la corda del MI grave, le frequenze con i picchi sono:
