@@ -157,24 +157,55 @@ function StopButton_Callback(hObject, eventdata, handles)
 end
 
      
-
-
-%{
-function updateXBar(x)
-    set(handles.Bar,'x',x);
+function updateGUI(tone,distance)
+    newX = calculateNewX(distance);
+    updateXBar(newX);
+    
+    
 end
 
-function calculateNewX(original_tone,distance)
+
+function updateXBar(x)
+    %updates the position of the level Bar 
+    x = calculateNewX(distance);
+    pos = get(handles.Bar,'Position');
+    pos(1) = x;
+    set(handles.Bar,'Position',pos);
+end
+
+
+function newX = calculateNewX(distance)
+    % calculates the new x of the bar inside the panel. 
+    % such value represents the misplacement between the right tone and the
+    % input one
     pos = get(handles.frequencyAxes,'Position');
     xPanel = pos(1);
     panelLenght = pos(3);
+    misplacement = getMisplacementPercentage(distance);
     
-    misplacement = getMisplacementPercentage(original_tone,distance);
-    
+    newX = xPanel + panelLenght*misplacement;
+    return;
 end
     
-function getMisplacementPercentage(original_tone,distance)
+
+function mispl = getMisplacementPercentage(distance)
+    % returns the percentage on the displacement.
+    % 100% means that the 
     %over 20 hz the difference is max
-    if abs(distance)
+    if distance >= 20
+        mispl = 100;
+    elseif distance <= -20
+        mispl = -100;    
+    else      
+        mispl = distance/20*100;     
+    end    
+    return;
 end
-%}
+
+
+function xCenter = getcenteredX()
+    %returns the x of the center of panel frequencyAxes
+    pos = get(handles.frequencyAxes,'Position');
+    xCenter = pos(1)+pos(3)/2;
+    return;
+end
