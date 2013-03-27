@@ -22,7 +22,7 @@ function varargout = tuner(varargin)
 
 % Edit the above text to modify the response to help tuner
 
-% Last Modified by GUIDE v2.5 27-Mar-2013 15:34:04
+% Last Modified by GUIDE v2.5 27-Mar-2013 17:57:18
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -42,7 +42,7 @@ else
     gui_mainfcn(gui_State, varargin{:});
 end
 % End initialization code - DO NOT EDIT
-
+end
 
 % --- Executes just before tuner is made visible.
 function tuner_OpeningFcn(hObject, eventdata, handles, varargin)
@@ -60,7 +60,7 @@ guidata(hObject, handles);
 
 % UIWAIT makes tuner wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
-
+end
 
 % --- Outputs from this function are returned to the command line.
 function varargout = tuner_OutputFcn(hObject, eventdata, handles) 
@@ -71,7 +71,7 @@ function varargout = tuner_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
-
+end
 
 
 
@@ -104,14 +104,21 @@ function StartButton_Callback(hObject, eventdata, handles)
         set(handles.StopButton,'TooltipString','Press to stop');
         
         % update the colors of the panel which represents the frequency axes
-        set(handles.frequencyAxes,'BackgroundColor',[0 0 0]);
+        %set(handles.frequencyAxes,'BackgroundColor',[0 0 0]);
+        set(handles.frequencyAxes,'BackgroundColor',[.53 .32 .32]);
         
         % update the colors of the two labels
-        set(handles.Bemolle,'ForegroundColor',[0 0 0]);
-        set(handles.Diesis,'ForegroundColor',[0 0 0]);
+        set(handles.Bemolle,'ForegroundColor',[.53 .32 .32]);
+        set(handles.Diesis,'ForegroundColor',[.53 .32 .32]);
         
         % change the message with the possibilities
         set(handles.HelpMex,'String','Just tune your guitar. To close press STOP.');
+        set(handles.HelpMex,'ForegroundColor',[.93 .165 .32]);
+        
+        % change the color of the level
+        set(handles.Bar,'BackgroundColor',[0 0 0]);
+       
+end
         
         
 % --- Executes on button press in StopButton.
@@ -143,16 +150,31 @@ function StopButton_Callback(hObject, eventdata, handles)
         
         % change the color of the bar (freqency correctness)
         set(handles.Bar,'BackgroundColor',[.235 .235 .235]);
+        set(handles.HelpMex,'ForegroundColor',[0 1 1]);
    
         % change the message with the possibilities
         set(handles.HelpMex,'String','Press button START to start using the tuner');
-
+end
 
      
 
 
-% --- Executes during object creation, after setting all properties.
-function uipanel3_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to uipanel3 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
+%{
+function updateXBar(x)
+    set(handles.Bar,'x',x);
+end
+
+function calculateNewX(original_tone,distance)
+    pos = get(handles.frequencyAxes,'Position');
+    xPanel = pos(1);
+    panelLenght = pos(3);
+    
+    misplacement = getMisplacementPercentage(original_tone,distance);
+    
+end
+    
+function getMisplacementPercentage(original_tone,distance)
+    %over 20 hz the difference is max
+    if abs(distance)
+end
+%}
