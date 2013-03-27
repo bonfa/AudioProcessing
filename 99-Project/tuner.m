@@ -157,13 +157,24 @@ function StopButton_Callback(hObject, eventdata, handles)
 end
 
      
-function updateGUI(tone,distance)
+function updateGUI(tone_frequency,distance)
     newX = calculateNewX(distance);
     updateXBar(newX);
     
-    
+    newTone = getToneName(tone_frequency);
+    updateNoteName(newTone);
 end
 
+
+function tone_name = getToneName(tone_frequency)
+    % //TODO
+    return;
+end
+
+
+function updateNoteName(note_name)
+    set(handles.Note,'String',note_name);
+end
 
 function updateXBar(x)
     %updates the position of the level Bar 
