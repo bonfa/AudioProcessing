@@ -105,142 +105,67 @@ end
 function StartButton_Callback(hObject, eventdata, handles)
         %start working        
         %update the colors of the panel which represent the frequency axes
+        %set(handles.frequencyAxes,'BackgroundColor',[0 0 0]);
+        
+        % disable the button Start
+        set(hObject,'Enable','off');
+        % change the colors of the Button Start
+        set(hObject,'BackgroundColor',[.314 .314 .314]);
+        set(hObject,'ForegroundColor',[.235 .235 .235]);
+        % change the help string
+        set(hObject,'TooltipString','');
+        
+        % enable the button Stop
+        set(handles.StopButton,'Enable','on');
+        % change the colors of the Button Stop
+        set(handles.StopButton,'BackgroundColor',[.6 .2 0]);
+        set(handles.StopButton,'ForegroundColor',[0 0 0])
+        % change the help string
+        set(handles.StopButton,'TooltipString','Press to stop');
+        
+        % update the colors of the panel which represents the frequency axes
         set(handles.frequencyAxes,'BackgroundColor',[0 0 0]);
         
-%{
-        else    %stop working
-        disp(flag);
-        %update the flag of the button
-        set(hObject,'Value',1);
-        %update the text of the button
-        set(hObject,'String','START');
-        %update the background color of the button
-        set(hObject,'BackgroundColor',[.0 .6 .2]);
-        %update the colors of the two labels
-        set(handles.Bemolle,'ForegroundColor',[.314 .314 .314]);
-        set(handles.Diesis,'ForegroundColor',[.314 .314 .314]);
-        %update the colors of the panel which represent the frequency axes
-        set(handles.frequencyAxes,'BackgroundColor',[.314 .314 .314]);
-    end
-%}    
-
-
-% --- Executes on button press in togglebutton2.
-function togglebutton2_Callback(hObject, eventdata, handles)
-% hObject    handle to togglebutton2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: get(hObject,'Value') returns toggle state of togglebutton2
+        % update the colors of the two labels
+        set(handles.Bemolle,'ForegroundColor',[0 0 0]);
+        set(handles.Diesis,'ForegroundColor',[0 0 0]);
         
-        %creo la prog barra
+        % change the message with the possibilities
+        set(handles.HelpMex,'String','Just tune your guitar. To close press STOP.');
         
-
-
-function edit1_Callback(hObject, eventdata, handles)
-% hObject    handle to edit1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of edit1 as text
-%        str2double(get(hObject,'String')) returns contents of edit1 as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function edit1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-% --------------------------------------------------------------------
-function Untitled_1_Callback(hObject, eventdata, handles)
-% hObject    handle to Untitled_1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-
-% --------------------------------------------------------------------
-function Untitled_2_Callback(hObject, eventdata, handles)
-% hObject    handle to Untitled_2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-
-% --- Executes on key press with focus on StartButton and none of its controls.
-function StartButton_KeyPressFcn(hObject, eventdata, handles)
-% hObject    handle to StartButton (see GCBO)
-% eventdata  structure with the following fields (see UICONTROL)
-%	Key: name of the key that was pressed, in lower case
-%	Character: character interpretation of the key(s) that was pressed
-%	Modifier: name(s) of the modifier key(s) (i.e., control, shift) pressed
-% handles    structure with handles and user data (see GUIDATA)
-    
-    
-
-
-
-function edit2_Callback(hObject, eventdata, handles)
-% hObject    handle to edit2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of edit2 as text
-%        str2double(get(hObject,'String')) returns contents of edit2 as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function edit2_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-% --- Executes during object creation, after setting all properties.
-function uipanel3_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to uipanel3 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
         
-
-
-% --- Executes on slider movement.
-function slider2_Callback(hObject, eventdata, handles)
-% hObject    handle to slider2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
-
-
-% --- Executes during object creation, after setting all properties.
-function slider2_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: slider controls usually have a light gray background.
-if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor',[.9 .9 .9]);
-end
-
-
 % --- Executes on button press in StopButton.
 function StopButton_Callback(hObject, eventdata, handles)
-% hObject    handle to StopButton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+%stop working        
+               
+        % disable the button Start
+        set(hObject,'Enable','off');
+        % change the colors of the Button Start
+        set(hObject,'BackgroundColor',[.314 .314 .314]);
+        set(hObject,'ForegroundColor',[.235 .235 .235]);
+        % change the help string
+        set(hObject,'TooltipString','');
+        
+        % enable the button Start
+        set(handles.StartButton,'Enable','on');
+        % change the colors of the Button Start
+        set(handles.StartButton,'BackgroundColor',[0 .6 0]);
+        set(handles.StartButton,'ForegroundColor',[0 0 0])
+        % change the help string
+        set(handles.StartButton,'TooltipString','Press to start using the tuner');
+        
+        % update the colors of the panel which represents the frequency axes
+        set(handles.frequencyAxes,'BackgroundColor',[.314 .314 .314]);
+        
+        % update the colors of the two labels
+        set(handles.Bemolle,'ForegroundColor',[.314 .314 .314]);
+        set(handles.Diesis,'ForegroundColor',[.314 .314 .314]);
+        
+        % change the color of the bar (freqency correctness)
+        set(handles.Bar,'BackgroundColor',[.235 .235 .235]);
+   
+        % change the message with the possibilities
+        set(handles.HelpMex,'String','Press button START to start using the tuner');
+
+
+     
