@@ -22,7 +22,7 @@ function varargout = tuner(varargin)
 
 % Edit the above text to modify the response to help tuner
 
-% Last Modified by GUIDE v2.5 27-Mar-2013 10:15:32
+% Last Modified by GUIDE v2.5 27-Mar-2013 11:40:31
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -73,18 +73,10 @@ function varargout = tuner_OutputFcn(hObject, eventdata, handles)
 varargout{1} = handles.output;
 
 
-% --- Executes on button press in StartButton.
-function StartButton_Callback(hObject, eventdata, handles)
-% hObject    handle to StartButton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on button press in StopButton.
-function StopButton_Callback(hObject, eventdata, handles)
-% hObject    handle to StopButton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+
+
 
 
 % --- Executes on slider movement.
@@ -109,16 +101,28 @@ if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColo
 end
 
 
-% --- Executes on button press in togglebutton1.
-function togglebutton1_Callback(hObject, eventdata, handles)
-% hObject    handle to togglebutton1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: get(hObject,'Value') returns toggle state of togglebutton1
+% --- Executes on button press in StartButton.
+function StartButton_Callback(hObject, eventdata, handles)
+        %start working        
+        %update the colors of the panel which represent the frequency axes
+        set(handles.frequencyAxes,'BackgroundColor',[0 0 0]);
         
-    
-
+%{
+        else    %stop working
+        disp(flag);
+        %update the flag of the button
+        set(hObject,'Value',1);
+        %update the text of the button
+        set(hObject,'String','START');
+        %update the background color of the button
+        set(hObject,'BackgroundColor',[.0 .6 .2]);
+        %update the colors of the two labels
+        set(handles.Bemolle,'ForegroundColor',[.314 .314 .314]);
+        set(handles.Diesis,'ForegroundColor',[.314 .314 .314]);
+        %update the colors of the panel which represent the frequency axes
+        set(handles.frequencyAxes,'BackgroundColor',[.314 .314 .314]);
+    end
+%}    
 
 
 % --- Executes on button press in togglebutton2.
@@ -169,9 +173,9 @@ function Untitled_2_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on key press with focus on togglebutton1 and none of its controls.
-function togglebutton1_KeyPressFcn(hObject, eventdata, handles)
-% hObject    handle to togglebutton1 (see GCBO)
+% --- Executes on key press with focus on StartButton and none of its controls.
+function StartButton_KeyPressFcn(hObject, eventdata, handles)
+% hObject    handle to StartButton (see GCBO)
 % eventdata  structure with the following fields (see UICONTROL)
 %	Key: name of the key that was pressed, in lower case
 %	Character: character interpretation of the key(s) that was pressed
@@ -233,3 +237,10 @@ function slider2_CreateFcn(hObject, eventdata, handles)
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
+
+
+% --- Executes on button press in StopButton.
+function StopButton_Callback(hObject, eventdata, handles)
+% hObject    handle to StopButton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
