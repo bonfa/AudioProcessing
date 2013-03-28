@@ -22,7 +22,7 @@ function varargout = tuner(varargin)
 
 % Edit the above text to modify the response to help tuner
 
-% Last Modified by GUIDE v2.5 28-Mar-2013 11:10:50
+% Last Modified by GUIDE v2.5 28-Mar-2013 12:36:45
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -175,7 +175,7 @@ function updateGUI(handles,tone_frequency,distance)
     % updates the name of the tone and the level of frequency
     newX = calculateNewX(handles,distance);
     updateXBar(handles,newX);
-    
+    drawnow();
     newTone = getToneName(tone_frequency);
     updateNoteName(handles,newTone);
     drawnow();
@@ -210,10 +210,15 @@ end
 
 function updateXBar(handles,x)
     %updates the position of the level Bar 
-    %x = calculateNewX(distance);
-    pos = get(handles.Bar,'Position');
+    pos = getpixelposition(handles.Bar,true);
+    disp(pos(1));
+    %disp('ciao');
+    disp(x);
     pos(1) = x;
-    set(handles.Bar,'Position',pos);
+    %set(handles.Bar,'Visible','off');
+    
+    setpixelposition(handles.Bar,pos,true);
+    %set(handles.Bar,'Visible','on');
 end
 
 
@@ -221,12 +226,11 @@ function newX = calculateNewX(handles,distance)
     % calculates the new x of the bar inside the panel. 
     % such value represents the misplacement between the right tone and the
     % input one
-    pos = get(handles.frequencyAxes,'Position');
-    xPanel = pos(1);
+    pos = getpixelposition(handles.frequencyAxes,true);
     panelLenght = pos(3);
     misplacement = getMisplacementPercentage(distance);
     
-    newX = xPanel + panelLenght*misplacement;
+    newX = panelLenght*misplacement;
     return;
 end
     
@@ -261,11 +265,10 @@ function demo_tune(src, evt,handles)
     
     % take a random value between 60 and 350
     a = 60 + 290*rand;
-    disp(a);
+    %disp(a);
     % takes the frequency and the distance
     [nearest_frequency,distance] = get_nearest_frequency_and_distance(a);
-    %disp(nearest_frequency);
-    %disp(distance);
+    
     % updates the bar and the note
     updateGUI(handles,nearest_frequency,distance);
 end
@@ -282,4 +285,3 @@ function stop_tuning(handles)
     % stops the timer
      stop(handles.timer);
 end
-
