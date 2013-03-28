@@ -211,10 +211,10 @@ end
 function updateXBar(handles,x)
     %updates the position of the level Bar 
     pos = getpixelposition(handles.Bar,true);
-    disp(pos(1));
+    %disp(pos(1));
     %disp('ciao');
-    disp(x);
-    pos(1) = x;
+    %disp(x);
+    pos(1) = pos(1)+10;
     %set(handles.Bar,'Visible','off');
     
     setpixelposition(handles.Bar,pos,true);
