@@ -56,7 +56,7 @@ function tuner_OpeningFcn(hObject, eventdata, handles, varargin)
 handles.output = hObject;
 
 % define the timer and its parameters
-handles.timer = timer('executionMode','fixedDelay','TimerFcn',{@demo_tune,handles},'Period',5);
+handles.timer = timer('executionMode','fixedDelay','TimerFcn',{@demo_tune,handles},'Period',1);
 
 % Update handles structure
 guidata(hObject, handles);
@@ -123,7 +123,7 @@ function StartButton_Callback(hObject, eventdata, handles)
         set(handles.Bar,'BackgroundColor',[0 0 0]);
         
         %start the tuning operation
-        start_tuning(handles);
+        start(handles.timer);
 end
         
         
@@ -162,7 +162,7 @@ function StopButton_Callback(hObject, eventdata, handles)
         set(handles.HelpMex,'String','Press button START to start using the tuner');
         
         %stop the tuning operation
-        stop_tuning(handles);
+        stop(handles.timer);
          
         % set the text of the note to ''
         set(handles.Note,'String','');
@@ -177,7 +177,7 @@ function updateGUI(handles,tone_frequency,distance)
     updateXBar(handles,newX);
     newTone = getToneName(tone_frequency);
     updateNoteName(handles,newTone);
-    drawnow();
+    %drawnow();
 end
 
 
@@ -210,12 +210,12 @@ end
 function updateXBar(handles,x)
     %updates the position of the level Bar 
     pos = getpixelposition(handles.Bar,true);
-    disp(x);
+    %disp(x);
     pos(1) = x;
-    %set(handles.Bar,'Visible','off');
-    disp(pos);
+    
+    %disp(pos);
     setpixelposition(handles.Bar,pos,true);
-    %set(handles.Bar,'Visible','on');
+    
 end
 
 
@@ -234,16 +234,26 @@ function newX = calculateNewX(handles,distance)
     panelLenght = panelDimension(3);
     
     barDimension = getpixelposition(handles.Bar,true);
-    barLenght = barDimension(3);
-    RangeInPixel = panelLenght - barLenght;
+    barLength = barDimension(3);
+    RangeInPixel = round((panelLenght - barLength)/2);
     
     ratioHzPixel = RangeInPixel/frequenceRange;
     
-    newX = round(ratioHzPixel*distance);
-    %disp(newX);
-    %misplacement = getMisplacementPercentage(distance);
+    theoricPosition = round(ratioHzPixel*distance)+RangeInPixel;
     
-    %newX = panelLenght*misplacement;
+    if theoricPosition > panelLenght 
+        %if the new X is over the maximum, its value is set to the maximum
+        newX = panelLenght-barLength;
+    elseif theoricPosition < 1
+        %if the new X is below the minimum, its value is set to the minimum
+        newX = 1; 
+    else
+        % the X is correct
+        newX = theoricPosition;
+    end
+    
+    newX = newX + panelDimension(1);
+    %disp(newX);
     return;
 end
     
@@ -278,6 +288,9 @@ function demo_tune(src, evt,handles)
     
     % take a random value between 60 and 350
     a = 60 + 290*rand;
+    %test con i valori limite :)
+    %a = 62.4;
+    %a = 349.6;
     %disp(a);
     % takes the frequency and the distance
     [nearest_frequency,distance] = get_nearest_frequency_and_distance(a);
@@ -287,14 +300,7 @@ function demo_tune(src, evt,handles)
 end
 
 
-function start_tuning(handles)
-    % start the timer and updates the GUI consequently
-    start(handles.timer);
-    
-end
 
 
-function stop_tuning(handles)
-    % stops the timer
-     stop(handles.timer);
-end
+
+
