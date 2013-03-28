@@ -56,7 +56,7 @@ function tuner_OpeningFcn(hObject, eventdata, handles, varargin)
 handles.output = hObject;
 
 % define the timer and its parameters
-handles.timer = timer('TimerFcn', {@(x,y)demo_tune,handles},'Period',5);
+handles.timer = timer('executionMode','fixedDelay','TimerFcn',{@demo_tune,handles},'Period',5);
 
 % Update handles structure
 guidata(hObject, handles);
@@ -163,6 +163,9 @@ function StopButton_Callback(hObject, eventdata, handles)
         
         %stop the tuning operation
         stop_tuning(handles);
+         
+        % set the text of the note to ''
+        set(handles.Note,'String','');
 end
 
      
@@ -175,6 +178,7 @@ function updateGUI(handles,tone_frequency,distance)
     
     newTone = getToneName(tone_frequency);
     updateNoteName(handles,newTone);
+    drawnow();
 end
 
 
@@ -199,7 +203,7 @@ function tone_name = getToneName(tone_frequency)
 end
 
 
-function updateNoteName(note_name)
+function updateNoteName(handles,note_name)
     % updates the name of the note on the GUI
     set(handles.Note,'String',note_name);
 end
@@ -251,7 +255,7 @@ end
 
 %% functions that set the timer
 
-function demo_tune(handles)
+function demo_tune(src, evt,handles)
     % callback of the tuning_timer
     % demo version
     
@@ -260,8 +264,8 @@ function demo_tune(handles)
     disp(a);
     % takes the frequency and the distance
     [nearest_frequency,distance] = get_nearest_frequency_and_distance(a);
-    disp(nearest_frequency);
-    disp(distance);
+    %disp(nearest_frequency);
+    %disp(distance);
     % updates the bar and the note
     updateGUI(handles,nearest_frequency,distance);
 end
