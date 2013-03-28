@@ -60,6 +60,11 @@ guidata(hObject, handles);
 
 % UIWAIT makes tuner wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
+
+% defines the timer for the tuning
+tuning_timer = timer;
+% sets its parameters
+set_tuning_timer();
 end
 
 % --- Outputs from this function are returned to the command line.
@@ -117,7 +122,9 @@ function StartButton_Callback(hObject, eventdata, handles)
         
         % change the color of the level
         set(handles.Bar,'BackgroundColor',[0 0 0]);
-       
+        
+        %start the tuning operation
+        start_tuning();
 end
         
         
@@ -154,10 +161,16 @@ function StopButton_Callback(hObject, eventdata, handles)
    
         % change the message with the possibilities
         set(handles.HelpMex,'String','Press button START to start using the tuner');
+        
+        %stop the tuning operation
+        stop_tuning();
 end
 
      
+%% functions that update the GUI
+
 function updateGUI(tone_frequency,distance)
+    % updates the name of the tone and the level of frequency
     newX = calculateNewX(distance);
     updateXBar(newX);
     
@@ -167,18 +180,34 @@ end
 
 
 function tone_name = getToneName(tone_frequency)
-    % //TODO
+    %set the english name of the tone basing on the frequency
+    if tone_frequency == 82.4 
+        tone_name = 'E';
+    elseif tone_frequency == 110
+        tone_name = 'A';
+    elseif tone_frequency == 146.8 
+        tone_name = 'D';
+    elseif tone_frequency == 196 
+        tone_name = 'G';
+    elseif tone_frequency == 246.9 
+        tone_name = 'B';
+    elseif  tone_frequency == 329.6
+        tone_name = 'E';
+    else
+        tone_name = '';
+    end
     return;
 end
 
 
 function updateNoteName(note_name)
+    % updates the name of the note on the GUI
     set(handles.Note,'String',note_name);
 end
 
 function updateXBar(x)
     %updates the position of the level Bar 
-    x = calculateNewX(distance);
+    %x = calculateNewX(distance);
     pos = get(handles.Bar,'Position');
     pos(1) = x;
     set(handles.Bar,'Position',pos);
@@ -219,4 +248,34 @@ function xCenter = getcenteredX()
     pos = get(handles.frequencyAxes,'Position');
     xCenter = pos(1)+pos(3)/2;
     return;
+end
+
+%% functions that set the timer
+
+function demo_tune()
+    % callback of the tuning_timer
+    % demo version
+    
+    % take a random value between 60 and 350
+    a = 60 + 290*rand;
+    
+end
+
+
+function start_tuning()
+    % start the timer and updates the GUI consequently
+    % first step: random update
+    start(tuning_timer);
+end
+
+
+function set_tuning_timer()
+    % set the parameters of the tuning timer
+    set(tuning_timer,'TimerFcn', @(x,y)demo_tune,'Period',1);    
+end
+
+
+function stop_tuning()
+    % stops the timer
+    stop(tuning_timer);
 end
