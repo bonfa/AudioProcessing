@@ -60,8 +60,9 @@ classdef tuner_core
             % display the info
             disp(['Reference Tone [Hz]: ', num2str(freq)]);
             disp(['Distance [Hz]: ', num2str(distance)]);
-        end
+        end %tune_example
         
     
-end
+    end %methods
+end %class
 
