@@ -22,7 +22,7 @@ function varargout = tuner(varargin)
 
 % Edit the above text to modify the response to help tuner
 
-% Last Modified by GUIDE v2.5 27-Mar-2013 17:57:18
+% Last Modified by GUIDE v2.5 28-Mar-2013 11:10:50
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -55,16 +55,15 @@ function tuner_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for tuner
 handles.output = hObject;
 
+% define the timer and its parameters
+handles.timer = timer('TimerFcn', {@(x,y)demo_tune,handles},'Period',5);
+
 % Update handles structure
 guidata(hObject, handles);
 
 % UIWAIT makes tuner wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
+% uiwait(handles.mainWindow);
 
-% defines the timer for the tuning
-tuning_timer = timer;
-% sets its parameters
-set_tuning_timer();
 end
 
 % --- Outputs from this function are returned to the command line.
@@ -124,7 +123,7 @@ function StartButton_Callback(hObject, eventdata, handles)
         set(handles.Bar,'BackgroundColor',[0 0 0]);
         
         %start the tuning operation
-        start_tuning();
+        start_tuning(handles);
 end
         
         
@@ -163,19 +162,19 @@ function StopButton_Callback(hObject, eventdata, handles)
         set(handles.HelpMex,'String','Press button START to start using the tuner');
         
         %stop the tuning operation
-        stop_tuning();
+        stop_tuning(handles);
 end
 
      
 %% functions that update the GUI
 
-function updateGUI(tone_frequency,distance)
+function updateGUI(handles,tone_frequency,distance)
     % updates the name of the tone and the level of frequency
-    newX = calculateNewX(distance);
-    updateXBar(newX);
+    newX = calculateNewX(handles,distance);
+    updateXBar(handles,newX);
     
     newTone = getToneName(tone_frequency);
-    updateNoteName(newTone);
+    updateNoteName(handles,newTone);
 end
 
 
@@ -205,7 +204,7 @@ function updateNoteName(note_name)
     set(handles.Note,'String',note_name);
 end
 
-function updateXBar(x)
+function updateXBar(handles,x)
     %updates the position of the level Bar 
     %x = calculateNewX(distance);
     pos = get(handles.Bar,'Position');
@@ -214,7 +213,7 @@ function updateXBar(x)
 end
 
 
-function newX = calculateNewX(distance)
+function newX = calculateNewX(handles,distance)
     % calculates the new x of the bar inside the panel. 
     % such value represents the misplacement between the right tone and the
     % input one
@@ -243,7 +242,7 @@ function mispl = getMisplacementPercentage(distance)
 end
 
 
-function xCenter = getcenteredX()
+function xCenter = getcenteredX(handles)
     %returns the x of the center of panel frequencyAxes
     pos = get(handles.frequencyAxes,'Position');
     xCenter = pos(1)+pos(3)/2;
@@ -252,30 +251,31 @@ end
 
 %% functions that set the timer
 
-function demo_tune()
+function demo_tune(handles)
     % callback of the tuning_timer
     % demo version
     
     % take a random value between 60 and 350
     a = 60 + 290*rand;
+    disp(a);
+    % takes the frequency and the distance
+    [nearest_frequency,distance] = get_nearest_frequency_and_distance(a);
+    disp(nearest_frequency);
+    disp(distance);
+    % updates the bar and the note
+    updateGUI(handles,nearest_frequency,distance);
+end
+
+
+function start_tuning(handles)
+    % start the timer and updates the GUI consequently
+    start(handles.timer);
     
 end
 
 
-function start_tuning()
-    % start the timer and updates the GUI consequently
-    % first step: random update
-    start(tuning_timer);
-end
-
-
-function set_tuning_timer()
-    % set the parameters of the tuning timer
-    set(tuning_timer,'TimerFcn', @(x,y)demo_tune,'Period',1);    
-end
-
-
-function stop_tuning()
+function stop_tuning(handles)
     % stops the timer
-    stop(tuning_timer);
+     stop(handles.timer);
 end
+
