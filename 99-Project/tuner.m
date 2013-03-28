@@ -175,7 +175,6 @@ function updateGUI(handles,tone_frequency,distance)
     % updates the name of the tone and the level of frequency
     newX = calculateNewX(handles,distance);
     updateXBar(handles,newX);
-    drawnow();
     newTone = getToneName(tone_frequency);
     updateNoteName(handles,newTone);
     drawnow();
@@ -211,12 +210,10 @@ end
 function updateXBar(handles,x)
     %updates the position of the level Bar 
     pos = getpixelposition(handles.Bar,true);
-    %disp(pos(1));
-    %disp('ciao');
-    %disp(x);
-    pos(1) = pos(1)+10;
+    disp(x);
+    pos(1) = x;
     %set(handles.Bar,'Visible','off');
-    
+    disp(pos);
     setpixelposition(handles.Bar,pos,true);
     %set(handles.Bar,'Visible','on');
 end
@@ -226,11 +223,27 @@ function newX = calculateNewX(handles,distance)
     % calculates the new x of the bar inside the panel. 
     % such value represents the misplacement between the right tone and the
     % input one
-    pos = getpixelposition(handles.frequencyAxes,true);
-    panelLenght = pos(3);
-    misplacement = getMisplacementPercentage(distance);
     
-    newX = panelLenght*misplacement;
+    % the frequence range is -20,20
+    % the panel length is 529
+    % the bar length is 5
+    % the space on the right and on the left is 262
+    % 1hz is 262/20 pixels
+    frequenceRange = 20;
+    panelDimension = getpixelposition(handles.frequencyAxes,true);
+    panelLenght = panelDimension(3);
+    
+    barDimension = getpixelposition(handles.Bar,true);
+    barLenght = barDimension(3);
+    RangeInPixel = panelLenght - barLenght;
+    
+    ratioHzPixel = RangeInPixel/frequenceRange;
+    
+    newX = round(ratioHzPixel*distance);
+    %disp(newX);
+    %misplacement = getMisplacementPercentage(distance);
+    
+    %newX = panelLenght*misplacement;
     return;
 end
     
