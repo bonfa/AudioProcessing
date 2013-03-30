@@ -210,9 +210,12 @@ end
 function updateXBar(handles,x)
     %updates the position of the level Bar 
     pos = getpixelposition(handles.Bar,true);
+    
     %disp(x);
-    %disp(pos);
+    %disp(pos(2));
+    
     pos(1) = x;
+    pos(2) = TunerConstants.BAR_Y;
     %disp(pos);
     %disp(pos);
     setpixelposition(handles.Bar,pos,true);
