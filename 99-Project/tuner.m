@@ -22,7 +22,7 @@ function varargout = tuner(varargin)
 
 % Edit the above text to modify the response to help tuner
 
-% Last Modified by GUIDE v2.5 28-Mar-2013 12:36:45
+% Last Modified by GUIDE v2.5 30-Mar-2013 15:43:26
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -298,9 +298,3 @@ function demo_tune(src, evt,handles)
     % updates the bar and the note
     updateGUI(handles,nearest_frequency,distance);
 end
-
-
-
-
-
-
