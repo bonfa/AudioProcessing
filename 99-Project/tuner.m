@@ -94,33 +94,33 @@ function StartButton_Callback(hObject, eventdata, handles)
         % disable the button Start
         set(hObject,'Enable','off');
         % change the colors of the Button Start
-        set(hObject,'BackgroundColor',[.314 .314 .314]);
-        set(hObject,'ForegroundColor',[.235 .235 .235]);
+        set(hObject,'BackgroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR);
+        set(hObject,'ForegroundColor',TunerConstants.BUTTONS_DISABLED_FOREGROUND_COLOR);
         % change the help string
         set(hObject,'TooltipString','');
         
         % enable the button Stop
         set(handles.StopButton,'Enable','on');
         % change the colors of the Button Stop
-        set(handles.StopButton,'BackgroundColor',[.6 .2 0]);
-        set(handles.StopButton,'ForegroundColor',[0 0 0])
+        set(handles.StopButton,'BackgroundColor',TunerConstants.BUTTON_STOP_ENABLED_BACKGROUND_COLOR);
+        set(handles.StopButton,'ForegroundColor',TunerConstants.BUTTON_STOP_ENABLED_FOREGROUND_COLOR);
         % change the help string
         set(handles.StopButton,'TooltipString','Press to stop');
         
         % update the colors of the panel which represents the frequency axes
         %set(handles.frequencyAxes,'BackgroundColor',[0 0 0]);
-        set(handles.frequencyAxes,'BackgroundColor',[.53 .32 .32]);
+        set(handles.frequencyAxes,'BackgroundColor',TunerConstants.AXES_BEMOLLE_DIESIS_ENABLED_COLOR);
         
         % update the colors of the two labels
-        set(handles.Bemolle,'ForegroundColor',[.53 .32 .32]);
-        set(handles.Diesis,'ForegroundColor',[.53 .32 .32]);
+        set(handles.Bemolle,'ForegroundColor',TunerConstants.AXES_BEMOLLE_DIESIS_ENABLED_COLOR);
+        set(handles.Diesis,'ForegroundColor',TunerConstants.AXES_BEMOLLE_DIESIS_ENABLED_COLOR);
         
         % change the message with the possibilities
         set(handles.HelpMex,'String','Just tune your guitar. To close press STOP.');
-        set(handles.HelpMex,'ForegroundColor',[.93 .165 .32]);
+        set(handles.HelpMex,'ForegroundColor',TunerConstants.HELP_MESSAGE_ENABLED_FOREGROUND_COLOR);
         
         % change the color of the level
-        set(handles.Bar,'BackgroundColor',[0 0 0]);
+        set(handles.Bar,'BackgroundColor',TunerConstants.BAR_ENABLED_BACKGROUND_COLOR);
         
         %start the tuning operation
         start(handles.timer);
@@ -134,29 +134,29 @@ function StopButton_Callback(hObject, eventdata, handles)
         % disable the button Start
         set(hObject,'Enable','off');
         % change the colors of the Button Start
-        set(hObject,'BackgroundColor',[.314 .314 .314]);
-        set(hObject,'ForegroundColor',[.235 .235 .235]);
+        set(hObject,'BackgroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR);
+        set(hObject,'ForegroundColor',TunerConstants.BUTTONS_DISABLED_FOREGROUND_COLOR);
         % change the help string
         set(hObject,'TooltipString','');
         
         % enable the button Start
         set(handles.StartButton,'Enable','on');
         % change the colors of the Button Start
-        set(handles.StartButton,'BackgroundColor',[0 .6 0]);
-        set(handles.StartButton,'ForegroundColor',[0 0 0])
+        set(handles.StartButton,'BackgroundColor',TunerConstants.BUTTON_START_ENABLED_BACKGROUD_COLOR);
+        set(handles.StartButton,'ForegroundColor',TunerConstants.BUTTON_STOP_ENABLED_FOREGROUND_COLOR);
         % change the help string
         set(handles.StartButton,'TooltipString','Press to start using the tuner');
         
         % update the colors of the panel which represents the frequency axes
-        set(handles.frequencyAxes,'BackgroundColor',[.314 .314 .314]);
+        set(handles.frequencyAxes,'BackgroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR);
         
         % update the colors of the two labels
-        set(handles.Bemolle,'ForegroundColor',[.314 .314 .314]);
-        set(handles.Diesis,'ForegroundColor',[.314 .314 .314]);
+        set(handles.Bemolle,'ForegroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR);
+        set(handles.Diesis,'ForegroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR);
         
-        % change the color of the bar (freqency correctness)
-        set(handles.Bar,'BackgroundColor',[.235 .235 .235]);
-        set(handles.HelpMex,'ForegroundColor',[0 1 1]);
+        % change the color of the bar (frequency correctness)
+        set(handles.Bar,'BackgroundColor',TunerConstants.BUTTONS_DISABLED_FOREGROUND_COLOR);
+        set(handles.HelpMex,'ForegroundColor',TunerConstants.HELP_MESSAGE_DISABLED_FOREGROUND_COLOR);
    
         % change the message with the possibilities
         set(handles.HelpMex,'String','Press button START to start using the tuner');
@@ -183,20 +183,20 @@ end
 
 function tone_name = getToneName(tone_frequency)
     %set the english name of the tone basing on the frequency
-    if tone_frequency == 82.4 
-        tone_name = 'E';
-    elseif tone_frequency == 110
-        tone_name = 'A';
-    elseif tone_frequency == 146.8 
-        tone_name = 'D';
-    elseif tone_frequency == 196 
-        tone_name = 'G';
-    elseif tone_frequency == 246.9 
-        tone_name = 'B';
-    elseif  tone_frequency == 329.6
-        tone_name = 'E';
+    if tone_frequency == TunerConstants.E_LOW_FREQ
+        tone_name = TunerConstants.E_LOW_NAME;
+    elseif tone_frequency == TunerConstants.A_FREQ
+        tone_name = TunerConstants.A_NAME;
+    elseif tone_frequency == TunerConstants.D_FREQ
+        tone_name = TunerConstants.D_NAME;
+    elseif tone_frequency == TunerConstants.G_FREQ
+        tone_name = TunerConstants.G_NAME;
+    elseif tone_frequency == TunerConstants.B_FREQ
+        tone_name = TunerConstants.B_NAME;
+    elseif  tone_frequency == TunerConstants.E_HIGH_FREQ
+        tone_name = TunerConstants.E_HIGH_NAME;
     else
-        tone_name = '';
+        tone_name = TunerConstants.EMPTY_STRING;
     end
     return;
 end
@@ -211,8 +211,9 @@ function updateXBar(handles,x)
     %updates the position of the level Bar 
     pos = getpixelposition(handles.Bar,true);
     %disp(x);
+    %disp(pos);
     pos(1) = x;
-    
+    %disp(pos);
     %disp(pos);
     setpixelposition(handles.Bar,pos,true);
     
@@ -229,7 +230,7 @@ function newX = calculateNewX(handles,distance)
     % the bar length is 5
     % the space on the right and on the left is 262
     % 1hz is 262/20 pixels
-    frequenceRange = 20;
+    frequenceRange = TunerConstants.FREQ_RANGE;
     panelDimension = getpixelposition(handles.frequencyAxes,true);
     panelLenght = panelDimension(3);
     
@@ -257,20 +258,6 @@ function newX = calculateNewX(handles,distance)
     return;
 end
     
-
-function mispl = getMisplacementPercentage(distance)
-    % returns the percentage on the displacement.
-    % 100% means that the 
-    %over 20 hz the difference is max
-    if distance >= 20
-        mispl = 100;
-    elseif distance <= -20
-        mispl = -100;    
-    else      
-        mispl = distance/20*100;     
-    end    
-    return;
-end
 
 
 function xCenter = getcenteredX(handles)
