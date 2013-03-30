@@ -55,8 +55,14 @@ function tuner_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for tuner
 handles.output = hObject;
 
+
+%define the recorder
+handles.recorder = audiorecorder;
+
 % define the timer and its parameters
-handles.timer = timer('executionMode','fixedDelay','TimerFcn',{@demo_tune,handles},'Period',1);
+%handles.timer = timer('executionMode','fixedDelay','TimerFcn',{@demo_tune,handles},'Period',TunerConstants.TIMER_PERIOD);
+handles.timer = timer('executionMode','fixedDelay','TimerFcn',{@tune,handles},'Period',TunerConstants.TIMER_PERIOD);
+
 
 % Update handles structure
 guidata(hObject, handles);
@@ -124,6 +130,9 @@ function StartButton_Callback(hObject, eventdata, handles)
         
         %start the tuning operation
         start(handles.timer);
+        
+        %start the recoder
+        record(handles.recorder);
 end
         
         
@@ -166,6 +175,14 @@ function StopButton_Callback(hObject, eventdata, handles)
          
         % set the text of the note to ''
         set(handles.Note,'String','');
+        
+        %stop the recoder
+        stop(handles.recorder);
+        
+        %these commands show that the recorder works correctly
+            %pl = getplayer(handles.recorder);
+            %disp('play');
+            %playblocking(pl);
 end
 
      
@@ -173,11 +190,19 @@ end
 
 function updateGUI(handles,tone_frequency,distance)
     % updates the name of the tone and the level of frequency
+    
+    %calculates the new x of the Bar
     newX = calculateNewX(handles,distance);
-    updateXBar(handles,newX);
+    
+    %calculates the name of the tone
     newTone = getToneName(tone_frequency);
+    
+    %updates the Bar
+    updateXBar(handles,newX);
+    
+    %updates the name of the note
     updateNoteName(handles,newTone);
-    %drawnow();
+   
 end
 
 
@@ -196,6 +221,7 @@ function tone_name = getToneName(tone_frequency)
     elseif  tone_frequency == TunerConstants.E_HIGH_FREQ
         tone_name = TunerConstants.E_HIGH_NAME;
     else
+        % tone_frequency = -1
         tone_name = TunerConstants.EMPTY_STRING;
     end
     return;
@@ -260,21 +286,14 @@ function newX = calculateNewX(handles,distance)
     %disp(newX);
     return;
 end
-    
 
 
-function xCenter = getcenteredX(handles)
-    %returns the x of the center of panel frequencyAxes
-    pos = get(handles.frequencyAxes,'Position');
-    xCenter = pos(1)+pos(3)/2;
-    return;
-end
-
-%% functions that set the timer
+%% function that have to be called when every timer timestamp
 
 function demo_tune(src, evt,handles)
     % callback of the tuning_timer
-    % demo version
+    % demo version -> the frequency is a random number
+    % no audio processing is made
     
     % take a random value between 60 and 350
     a = 60 + 290*rand;
@@ -287,4 +306,38 @@ function demo_tune(src, evt,handles)
     
     % updates the bar and the note
     updateGUI(handles,nearest_frequency,distance);
+end
+
+
+function tune(src, evt,handles)
+    % callback of the tuning_timer
+        
+    % stops the audiorecorder
+    stop(handles.recorder);
+    
+    try
+        % takes the audio data
+        audio_vector = getaudiodata(handles.recorder);
+
+        % starts again the audio recorder
+        record(handles.recorder);
+
+        % processes the audio and extracts the frequency of the sound
+        input_freq = get_audio_main_frequency_in_guitar_domain(audio_vector);
+        
+        % updates the GUI
+        [nearest_frequency,distance] = get_nearest_frequency_and_distance(input_freq);
+
+        % updates the bar and the note
+        updateGUI(handles,nearest_frequency,distance);
+    catch err
+        %print the error
+        disp(err.message);
+        
+        % starts again the audio recorder
+        record(handles.recorder);
+        
+        % updates the bar and the note
+        updateGUI(handles,-1,0);
+    end
 end
