@@ -243,7 +243,7 @@ function tone_name = getToneName(tone_frequency)
     elseif  tone_frequency == TunerConstants.G_HIGH_FREQ
         tone_name = TunerConstants.G_NAME;
     else
-        % tone_frequency = -1
+        % tone_frequency = -1 or 0
         tone_name = TunerConstants.EMPTY_STRING;
     end
     return;
@@ -355,7 +355,7 @@ function tune(src, evt,handles)
         updateGUI(handles,nearest_frequency,distance);
     catch err
         %print the error
-        %disp(err.message);
+        disp(err.message);
         
         % starts again the audio recorder
         record(handles.recorder);
