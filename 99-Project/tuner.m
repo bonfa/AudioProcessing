@@ -96,7 +96,7 @@ function StartButton_Callback(hObject, eventdata, handles)
         %start working        
         %update the colors of the panel which represent the frequency axes
         %set(handles.frequencyAxes,'BackgroundColor',[0 0 0]);
-        
+        %disp(get(handles.Bar,'Position'));
         % disable the button Start
         set(hObject,'Enable','off');
         % change the colors of the Button Start
@@ -111,7 +111,7 @@ function StartButton_Callback(hObject, eventdata, handles)
         set(handles.StopButton,'BackgroundColor',TunerConstants.BUTTON_STOP_ENABLED_BACKGROUND_COLOR);
         set(handles.StopButton,'ForegroundColor',TunerConstants.BUTTON_STOP_ENABLED_FOREGROUND_COLOR);
         % change the help string
-        set(handles.StopButton,'TooltipString','Press to stop');
+        set(handles.StopButton,'TooltipString',TunerConstants.BUTTON_STOP_ENABLED_TOOLTIP_MEX);
         
         % update the colors of the panel which represents the frequency axes
         %set(handles.frequencyAxes,'BackgroundColor',[0 0 0]);
@@ -122,7 +122,7 @@ function StartButton_Callback(hObject, eventdata, handles)
         set(handles.Diesis,'ForegroundColor',TunerConstants.AXES_BEMOLLE_DIESIS_ENABLED_COLOR);
         
         % change the message with the possibilities
-        set(handles.HelpMex,'String','Just tune your guitar. To close press STOP.');
+        set(handles.HelpMex,'String',TunerConstants.HELP_MESSAGE_FOR_TUNING);
         set(handles.HelpMex,'ForegroundColor',TunerConstants.HELP_MESSAGE_ENABLED_FOREGROUND_COLOR);
         
         % change the color of the level
@@ -161,7 +161,7 @@ function StopButton_Callback(hObject, eventdata, handles)
         set(handles.StartButton,'BackgroundColor',TunerConstants.BUTTON_START_ENABLED_BACKGROUD_COLOR);
         set(handles.StartButton,'ForegroundColor',TunerConstants.BUTTON_STOP_ENABLED_FOREGROUND_COLOR);
         % change the help string
-        set(handles.StartButton,'TooltipString','Press to start using the tuner');
+        set(handles.StartButton,'TooltipString',TunerConstants.BUTTON_START_ENABLED_TOOLTIP_MEX);
         
         % update the colors of the panel which represents the frequency axes
         set(handles.frequencyAxes,'BackgroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR);
@@ -175,7 +175,7 @@ function StopButton_Callback(hObject, eventdata, handles)
         set(handles.HelpMex,'ForegroundColor',TunerConstants.HELP_MESSAGE_DISABLED_FOREGROUND_COLOR);
    
         % change the message with the possibilities
-        set(handles.HelpMex,'String','Press button START to start using the tuner');
+        set(handles.HelpMex,'String',TunerConstants.HELP_MESSAGE_FOR_STARTING);
         
         %Change the color of the strings -20hz ... +20hz
         set(handles.min20str,'ForegroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR);
@@ -184,12 +184,15 @@ function StopButton_Callback(hObject, eventdata, handles)
         set(handles.plus10str,'ForegroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR);
         set(handles.plus20str,'ForegroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR);      
         
-        %stop the tuning operation
-        stop(handles.timer);
-         
         % set the text of the note to ''
         set(handles.Note,'String','');
         
+        %set the position of the bar in the middle
+        set(handles.Bar,'Position',TunerConstants.BAR_STARTING_POSITION);
+        
+        %stop the tuning operation
+        stop(handles.timer);
+               
         %stop the recoder
         stop(handles.recorder);
         
