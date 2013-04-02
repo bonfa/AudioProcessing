@@ -33,7 +33,7 @@ function [ input_freq ] = get_audio_main_frequency_in_guitar_domain(audio_vector
     
     % normalize indexes
     normalized_indexes = indexes*(TunerConstants.FS/(2*length(audio_data_normalized)))+min_freq;
-    disp(normalized_indexes);
+    %disp(normalized_indexes);
     
     % the frequency is the lowest
     input_freq = normalized_indexes(1);
