@@ -128,6 +128,13 @@ function StartButton_Callback(hObject, eventdata, handles)
         % change the color of the level
         set(handles.Bar,'BackgroundColor',TunerConstants.BAR_ENABLED_BACKGROUND_COLOR);
         
+        %Change the color of the strings -20hz ... +20hz
+        set(handles.min20str,'ForegroundColor',TunerConstants.AXES_BEMOLLE_DIESIS_ENABLED_COLOR);
+        set(handles.min10str,'ForegroundColor',TunerConstants.AXES_BEMOLLE_DIESIS_ENABLED_COLOR);
+        set(handles.zeroStr,'ForegroundColor',TunerConstants.AXES_BEMOLLE_DIESIS_ENABLED_COLOR);
+        set(handles.plus10str,'ForegroundColor',TunerConstants.AXES_BEMOLLE_DIESIS_ENABLED_COLOR);
+        set(handles.plus20str,'ForegroundColor',TunerConstants.AXES_BEMOLLE_DIESIS_ENABLED_COLOR);
+        
         %start the tuning operation
         start(handles.timer);
         
@@ -169,6 +176,13 @@ function StopButton_Callback(hObject, eventdata, handles)
    
         % change the message with the possibilities
         set(handles.HelpMex,'String','Press button START to start using the tuner');
+        
+        %Change the color of the strings -20hz ... +20hz
+        set(handles.min20str,'ForegroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR);
+        set(handles.min10str,'ForegroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR);
+        set(handles.zeroStr,'ForegroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR);
+        set(handles.plus10str,'ForegroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR);
+        set(handles.plus20str,'ForegroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR);      
         
         %stop the tuning operation
         stop(handles.timer);
@@ -243,6 +257,7 @@ function updateXBar(handles,x)
     %disp(pos(2));
     
     pos(1) = x;
+    %disp(pos(2));
     pos(2) = TunerConstants.BAR_Y;
     %disp(pos);
     %disp(pos);
