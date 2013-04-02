@@ -28,7 +28,7 @@ function [ input_freq ] = get_audio_main_frequency_in_guitar_domain(audio_vector
     max_i = round(max_freq * 2 * length(audio_data_normalized)/TunerConstants.FS);
 
     % find the peaks in the range of defined frequences
-    [~,indexes] = findpeaks(audio_data_normalized(min_i:max_i),'MINPEAKHEIGHT',100,'THRESHOLD',50,'MINPEAKDISTANCE',4);
+    [~,indexes] = findpeaks(audio_data_normalized(min_i:max_i),'MINPEAKHEIGHT',80,'THRESHOLD',40,'MINPEAKDISTANCE',4);
     
     
     % normalize indexes

@@ -140,6 +140,9 @@ function StartButton_Callback(hObject, eventdata, handles)
         
         %start the recoder
         record(handles.recorder);
+        
+        %disable findpeaks warnings
+        warning('OFF', 'signal:findpeaks:largeMinPeakHeight');
 end
         
         
