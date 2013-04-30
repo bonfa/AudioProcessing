@@ -22,7 +22,7 @@ function varargout = tuner(varargin)
 
 % Edit the above text to modify the response to help tuner
 
-% Last Modified by GUIDE v2.5 30-Mar-2013 15:43:26
+% Last Modified by GUIDE v2.5 30-Apr-2013 18:37:22
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -135,6 +135,15 @@ function StartButton_Callback(hObject, eventdata, handles)
         set(handles.plus10str,'ForegroundColor',TunerConstants.AXES_BEMOLLE_DIESIS_ENABLED_COLOR);
         set(handles.plus20str,'ForegroundColor',TunerConstants.AXES_BEMOLLE_DIESIS_ENABLED_COLOR);
         
+        % enables the button for chosing the tone to tune
+        set(handles.AutoButton,'Enable','on');
+        set(handles.EButton,'Enable','on');
+        set(handles.AButton,'Enable','on');
+        set(handles.DButton,'Enable','on');
+        set(handles.GButton,'Enable','on');
+        set(handles.BButton,'Enable','on');
+        set(handles.EhButton,'Enable','on');
+
         %start the tuning operation
         start(handles.timer);
         
@@ -192,6 +201,16 @@ function StopButton_Callback(hObject, eventdata, handles)
         
         %set the position of the bar in the middle
         set(handles.Bar,'Position',TunerConstants.BAR_STARTING_POSITION);
+        
+        % enables the button for chosing the tone to tune
+        set(handles.AutoButton,'Enable','off');
+        set(handles.EButton,'Enable','off');
+        set(handles.AButton,'Enable','off');
+        set(handles.DButton,'Enable','off');
+        set(handles.GButton,'Enable','off');
+        set(handles.BButton,'Enable','off');
+        set(handles.EhButton,'Enable','off');
+       
         
         %stop the tuning operation
         stop(handles.timer);
@@ -260,7 +279,7 @@ function updateXBar(handles,x)
     pos = getpixelposition(handles.Bar,true);
     
     %disp(x);
-    disp(pos(2));
+    %disp(pos(2));
     
     pos(1) = x;
     %disp(pos(2));
