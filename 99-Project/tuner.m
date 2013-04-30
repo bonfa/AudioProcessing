@@ -312,7 +312,7 @@ end
 
 
 %% function that have to be called when every timer timestamp
-
+%{
 function demo_tune(src, evt,handles)
     % callback of the tuning_timer
     % demo version -> the frequency is a random number
@@ -330,7 +330,7 @@ function demo_tune(src, evt,handles)
     % updates the bar and the note
     updateGUI(handles,nearest_frequency,distance);
 end
-
+%}
 
 function tune(src, evt,handles)
     % callback of the tuning_timer
