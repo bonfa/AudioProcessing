@@ -260,7 +260,7 @@ function updateXBar(handles,x)
     pos = getpixelposition(handles.Bar,true);
     
     %disp(x);
-    %disp(pos(2));
+    disp(pos(2));
     
     pos(1) = x;
     %disp(pos(2));
@@ -333,7 +333,7 @@ function tune(src, evt,handles)
         % updates the GUI
         [nearest_frequency,distance] = get_nearest_frequency_and_distance(input_freq);
 
-        disp(distance);
+        %disp(distance);
         
         % updates the bar and the note
         updateGUI(handles,nearest_frequency,distance);
