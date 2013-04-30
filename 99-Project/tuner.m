@@ -277,11 +277,11 @@ function newX = calculateNewX(handles,distance)
     % such value represents the misplacement between the right tone and the
     % input one
     
-    % the frequence range is -20,20
+    % the frequence range is -50,50
     % the panel length is 529
     % the bar length is 5
     % the space on the right and on the left is 262
-    % 1hz is 262/20 pixels
+    % 1hz is 262/50 pixels
     frequenceRange = TunerConstants.FREQ_RANGE;
     panelDimension = getpixelposition(handles.frequencyAxes,true);
     panelLenght = panelDimension(3);

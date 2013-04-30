@@ -48,7 +48,7 @@ classdef TunerConstants
         
         
         % OTHER PARAMETERS
-        FREQ_RANGE = 20;
+        FREQ_RANGE = 50;
         TIMER_PERIOD = 1;
         BAR_Y = 35.5384615384615; % this is a value inserted in ordr to supply to an error in linux --> the bar moving continuously decrease its y
         
