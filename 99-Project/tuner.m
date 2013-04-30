@@ -312,25 +312,7 @@ end
 
 
 %% function that have to be called when every timer timestamp
-%{
-function demo_tune(src, evt,handles)
-    % callback of the tuning_timer
-    % demo version -> the frequency is a random number
-    % no audio processing is made
-    
-    % take a random value between 60 and 350
-    a = 60 + 290*rand;
-    %test con i valori limite :)
-    %a = 62.4;
-    %a = 349.6;
-    %disp(a);
-    % takes the frequency and the distance
-    [nearest_frequency,distance] = get_nearest_frequency_and_distance(a);
-    
-    % updates the bar and the note
-    updateGUI(handles,nearest_frequency,distance);
-end
-%}
+% It's the function that tunes the input sound.
 
 function tune(src, evt,handles)
     % callback of the tuning_timer
