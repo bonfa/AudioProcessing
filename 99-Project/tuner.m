@@ -333,6 +333,8 @@ function tune(src, evt,handles)
         % updates the GUI
         [nearest_frequency,distance] = get_nearest_frequency_and_distance(input_freq);
 
+        disp(distance);
+        
         % updates the bar and the note
         updateGUI(handles,nearest_frequency,distance);
     catch err
