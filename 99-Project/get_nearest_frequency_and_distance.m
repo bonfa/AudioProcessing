@@ -8,8 +8,8 @@ function [ nearest_frequency,distance ] = get_nearest_frequency_and_distance( in
         return;
     end
 
-                                                                   % G4
-    reference_strings_tones = [82.4, 110, 146.8, 196, 246.9, 329.6, 392];
+                                                                   
+    reference_strings_tones = [82.4, 110, 146.8, 196, 246.9, 329.6];
     
     [~,i] = min(abs(reference_strings_tones - input_freq));
     
