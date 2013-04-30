@@ -22,7 +22,7 @@ function varargout = tuner(varargin)
 
 % Edit the above text to modify the response to help tuner
 
-% Last Modified by GUIDE v2.5 30-Apr-2013 18:37:22
+% Last Modified by GUIDE v2.5 30-Apr-2013 19:21:31
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -143,6 +143,15 @@ function StartButton_Callback(hObject, eventdata, handles)
         set(handles.GButton,'Enable','on');
         set(handles.BButton,'Enable','on');
         set(handles.EhButton,'Enable','on');
+        
+        % change the color of the radiobuttons
+        set(handles.AutoButton,'ForegroundColor',TunerConstants.AXES_BEMOLLE_DIESIS_ENABLED_COLOR)
+        set(handles.EButton,'ForegroundColor',TunerConstants.AXES_BEMOLLE_DIESIS_ENABLED_COLOR)
+        set(handles.AButton,'ForegroundColor',TunerConstants.AXES_BEMOLLE_DIESIS_ENABLED_COLOR)
+        set(handles.DButton,'ForegroundColor',TunerConstants.AXES_BEMOLLE_DIESIS_ENABLED_COLOR)
+        set(handles.GButton,'ForegroundColor',TunerConstants.AXES_BEMOLLE_DIESIS_ENABLED_COLOR)
+        set(handles.BButton,'ForegroundColor',TunerConstants.AXES_BEMOLLE_DIESIS_ENABLED_COLOR)
+        set(handles.EhButton,'ForegroundColor',TunerConstants.AXES_BEMOLLE_DIESIS_ENABLED_COLOR)
 
         %start the tuning operation
         start(handles.timer);
@@ -210,7 +219,18 @@ function StopButton_Callback(hObject, eventdata, handles)
         set(handles.GButton,'Enable','off');
         set(handles.BButton,'Enable','off');
         set(handles.EhButton,'Enable','off');
-       
+
+        % change the color of the radiobuttons
+        set(handles.AutoButton,'ForegroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR)
+        set(handles.EButton,'ForegroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR)
+        set(handles.AButton,'ForegroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR)
+        set(handles.DButton,'ForegroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR)
+        set(handles.GButton,'ForegroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR)
+        set(handles.BButton,'ForegroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR)
+        set(handles.EhButton,'ForegroundColor',TunerConstants.BUTTONS_DISABLED_BACKGROUD_COLOR)
+        
+        %set the default note to auto
+        set(handles.NotePanel,'SelectedObject',handles.AutoButton);
         
         %stop the tuning operation
         stop(handles.timer);
@@ -349,9 +369,19 @@ function tune(src, evt,handles)
         % processes the audio and extracts the frequency of the sound
         input_freq = get_audio_main_frequency_in_guitar_domain(audio_vector);
         
-        % updates the GUI
-        [nearest_frequency,distance] = get_nearest_frequency_and_distance(input_freq);
-
+        radio_button_tag = get(get(handles.NotePanel,'SelectedObject'),'Tag');
+        %disp(radio_button_tag);
+        if strcmp(radio_button_tag,TunerConstants.AUTO)==1
+            % Auto mode - auto detect the note and the distance
+            [nearest_frequency,distance] = get_nearest_frequency_and_distance(input_freq);
+        else
+            % Manual selection of the note
+            nearest_frequency = get_selected_note(radio_button_tag);
+            %calculate distance
+            distance = input_freq - nearest_frequency;
+        end
+            
+        % updates the GUI    
         %disp(distance);
         
         % updates the bar and the note
@@ -366,4 +396,18 @@ function tune(src, evt,handles)
         % updates the bar and the note
         updateGUI(handles,-1,0);
     end
+end
+
+
+function  [reference_freq] = get_selected_note(tag)
+    switch(tag)
+        case 'EButton', reference_freq = TunerConstants.E_LOW_FREQ; 
+        case 'AButton', reference_freq = TunerConstants.A_FREQ; 
+        case 'DButton', reference_freq = TunerConstants.D_FREQ; 
+        case 'GButton', reference_freq = TunerConstants.G_FREQ; 
+        case 'BButton', reference_freq = TunerConstants.B_FREQ; 
+        case 'EhButton', reference_freq = TunerConstants.E_HIGH_FREQ; 
+    end
+    
+    return;
 end

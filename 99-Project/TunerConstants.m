@@ -24,7 +24,7 @@ classdef TunerConstants
         BUTTON_STOP_ENABLED_TOOLTIP_MEX = 'Press to stop';
         
         HELP_MESSAGE_FOR_STARTING = 'Press button START to start using the tuner';
-        HELP_MESSAGE_FOR_TUNING = 'Just tune your guitar. To close press STOP.';
+        HELP_MESSAGE_FOR_TUNING = 'Select the string to tune and play. ''Auto'' detects authomatically the note. To close press STOP.';
         
         BAR_STARTING_POSITION = [52.175 .021 1.058 3.091];
         
@@ -46,6 +46,7 @@ classdef TunerConstants
         E_HIGH_NAME = 'E';
         EMPTY_STRING = '-';
         
+        AUTO = 'AutoButton';
         
         % OTHER PARAMETERS
         FREQ_RANGE = 50;
