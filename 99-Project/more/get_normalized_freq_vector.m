@@ -3,7 +3,7 @@ function [ frequency_vector ] = get_normalized_freq_vector( fs, time_vector )
 %   Detailed explanation goes here
        
     % calculates the abs of fft of the vector
-    fft_abs_vect = abs(fft(time_vector));
+    fft_abs_vect = 20*log10(abs(fft(time_vector)));
     
     % ASSUMPTION - real signal --> even simmetry of the abs of the fft 
     % limits on the first half part of the fft

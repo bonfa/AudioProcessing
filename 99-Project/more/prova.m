@@ -9,8 +9,16 @@ clc
 recorder = audiorecorder;
 
 disp('Start Recording.');
-recordblocking(recorder,4);
+recordblocking(recorder,1);
 disp('End of Recording.');
+
+stop(recorder);
+% extract audio data (double)
+audio_data = getaudiodata(recorder);
+
+get_normalized_freq_vector(8000,audio_data);
+
+
 
 disp('Start playing.');
 play(recorder);
