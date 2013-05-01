@@ -1,0 +1,121 @@
+\documentclass[a4paper,12pt,numbers=enddot]{scrreprt}	% numbers=enddot fa seguire il puntino dopo il numero di cap. noenddot lo toglie 
+\usepackage[utf8]{inputenc}	%imposta la codifica di input; invece di "latin1", anche "utf8" va bene
+\usepackage[footnotesize,it]{caption}	%per i cara piccoli
+\usepackage[english]{babel}	%l?ultima lingua È quella predefinita
+\usepackage{listings}		%codice sorgente
+\lstset{frame=shadowbox, rulesepcolor=\color{blue}, breaklines=true, basicstyle=\small\ttfamily, columns=fullflexible,  keepspaces=true}	%disegna un rettangolo attorno al codice sorgente
+\usepackage{indentfirst}	%rientra il primo paragrafo di ogni sezione
+\usepackage{amsmath}%,amssymb,amsthm       % indispensabili per la matematica
+\usepackage{graphicx}		% per inserire le immagini
+\usepackage{graphics}		%?
+\usepackage{sidecap}		%per mettere caption a lato della figuta
+ % didascalie personalizzate
+\usepackage{caption}		
+\usepackage[numbers]{natbib} %?
+\usepackage{psfrag} %?
+\usepackage{multirow}	%?
+\usepackage{booktabs} 	%?
+\usepackage{lscape}%?
+\usepackage{longtable}%?  %%
+\usepackage{enumitem}%?
+\usepackage{epsfig}		%per mettere fig usando comando tabular
+\usepackage{makeidx}	%indice
+\usepackage{varioref}
+\usepackage[table]{xcolor}
+\usepackage{epstopdf}
+\usepackage{wrapfig}
+%Setta dimensioni body
+\usepackage[total={16.5cm,25cm},
+						top=3.5cm,
+						bottom=3.5cm,
+						left=2.5cm,
+						right=2.5cm,
+						%includefoot,
+						centering]{geometry}
+
+\usepackage{wallpaper}%?
+\usepackage{color}%?
+\usepackage{setspace}		%per definire con dopo l'interlinea con \onehalfspacing
+\onehalfspacing
+\usepackage{appendix}
+\usepackage{acronym}%?
+\usepackage{makecell}
+\usepackage{todonotes} %%todo things
+
+%Intestazioni e pie? pag.  
+\usepackage[automark,headsepline,footsepline,autooneside,plainheadsepline,plainfootsepline]{scrpage2}	%i comandi plain-ecccc servono a dire che nella prima pag. del nuovo cap. voglio queste cose.
+\usepackage[pagebackref=true, colorlinks=true, linkcolor=blue, hyperindex=true, urlcolor=blue, citecolor = green, linktocpage=true]{hyperref}		% indici e riferimenti cliccabili
+\pagestyle{scrheadings}
+\clearscrheadfoot
+\ihead [Francesco Bonfadelli]{Francesco Bonfadelli}	%Kopfzeile Innen
+\chead {}					%Kopfzeile Mitte
+\ohead [\headmark]{\headmark}			%Kopfzeile Auﬂen
+\ifoot {}					%Fuﬂzeile Innen
+\cfoot[\pagemark]{\pagemark} 			%Fuﬂzeile Mitte
+\ofoot {}
+
+\automark[chapter]{chapter}
+\KOMAoptions{cleardoublepage=scrheadings}	%per lasciate style=scrheadings anche per le pag vuoto (svuotate col comando cleardoublepage), si puo? anche scegliere cleardoublepage=plain o empty
+
+\footskip=30pt	 %	abbassa il margine inf della pag
+\setlength{\headheight}{2\baselineskip}
+
+\newcommand\SectionFontStyle{\rmfamily}			% gehˆrt zu den beiden folgenden setkomafont , keine ahnung was es macht =)
+\setkomafont{chapter}{\huge\bfseries\SectionFontStyle}	% Chapter in der gleichen schriftart SectionFontStyle
+\setkomafont{sectioning}{\bfseries\SectionFontStyle}
+%Crea i link nel pdf (vedere come si fa a farli verdino e con i collegamenti solo sui numeri, non questi rettangoli cessi rossi	
+
+
+\makeindex
+\begin{document}
+
+\renewcommand{\bibname}{References}	%to change the name: bibliography to references
+
+%\pagenumbering{roman}
+%\pagestyle{plain}
+%******************************************************************
+% Materiale iniziale
+%******************************************************************
+
+\input{beginningEnding/frontespizio}
+
+\pagenumbering{arabic}
+\tableofcontents
+\listoffigures
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
+\input{chapters/chap_01_state_of_the_art.tex}
+\newpage
+\input{chapters/chap_02_requirements.tex}
+\newpage
+\input{chapters/chap_03_development_process.tex}
+\newpage
+\input{chapters/chap_04_design.tex}
+\newpage
+\input{chapters/chap_05_implementation.tex}
+
+
+\pagenumbering{roman}
+
+
+\newpage
+\clearpage
+\appendix
+%\input{Chapters/appendice}
+\newpage
+\clearpage
+
+
+
+%******************************************************************
+% Materiale Finale
+%******************************************************************
+\input{beginningEnding/references}
+\newpage										
+\clearpage
+
+
+\end{document}

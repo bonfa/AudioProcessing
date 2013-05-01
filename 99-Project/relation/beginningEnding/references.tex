@@ -1,0 +1,11 @@
+%******************************************************************
+%References (two methods in Latex, this (bibTex) with the databe is the best
+%******************************************************************
+\cleardoublepage
+\phantomsection	%gives hyperref something to hold on to when making the link.
+\addcontentsline{toc}{chapter}{References}
+\bibliographystyle{alpha}				%scelgo come formattare la biblio (abbrv abbrevia i nomi propri. plain non li abbrevia. Ce ne sono un sacco).
+\bibliography{beginningEnding/database_references} 	%database dove prendere le info  
+\nocite{*}						%stampa TUTTO quello presente nella banca dati, altrimenti solo la roba citata nella tesi
+
+%NB in kile bisogna aggiungere BibTex al QuickBuild per far compilare la bibliografia. Metterlo subito dopo Latex.
