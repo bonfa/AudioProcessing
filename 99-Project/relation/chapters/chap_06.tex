@@ -1,0 +1,26 @@
+\chapter*{Differenza della distanza dalle frequenze di riferimento}\label{cap:distanza}
+
+La frequenza della corda viene confrontata con la frequenza di riferimento desiderata per valutare la differenza dalla frequenza corretta.
+Come scegliere la frequenza di riferimento è descritto nel capitolo che descrive l'interfaccia grafica del software.
+La tabella \ref{tab:frequenze_riferimento} contiene per ciascuna corda, il numero, la nota prodotta nel caso in cui la corda venga pizzicata e la relativa frequenza di riferimento.
+
+	\begin{table}[h]
+	\center
+	\begin{tabular}{|l|c|r|}
+		\hline
+		Corda	& 	Nota    & Frequenza (hz) \\
+		\hline
+		6	&	E	&	82.4     \\
+		5	&	A	&	110      \\
+		4	&	D	&	146.8    \\
+		3	&	G	&	196      \\
+		2	&	B	&	246.9    \\
+		1	&	E	&	329.6    \\
+		\hline
+	\end{tabular}
+	\caption{\textit{Tabella contenente la frequenza della nota di ciascuna corda della chitarra}}
+	\label{tab:frequenze_riferimento}
+	\end{table}
+
+La distanza tra la frequenza di riferimento e la frequenza del segnale è calcolata con una semplice sottrazione.
+In questo caso, l'andamento logaritmico della percezione delle frequenze può essere trascurato in quanto per il range di frequenze preso in considerazione l'ampiezza della banda critica rimane costante a 100 hz. 
