@@ -88,7 +88,7 @@ function [ input_freq ] = get_audio_main_frequency_in_guitar_domain(audio_vector
     % interpolation of the interval around the bad maximum
     interpolated_prod = interp1(x,y,finer_x,'spline');
     
-    
+    %{
     % debug part - plots the values to be interpolated and the
     % interpolation function.
     %
@@ -114,7 +114,7 @@ function [ input_freq ] = get_audio_main_frequency_in_guitar_domain(audio_vector
     hold off;
     figure(3);
     plot(product(minimum_i:maximum_i));
-    
+    %}
     
     % calculate again the maximum - higher precision
     [mi,ii] = max(interpolated_prod);
