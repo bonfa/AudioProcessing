@@ -36,13 +36,18 @@ Il segnale risultante avrà un unico picco nella frequenza fondamentale.
 Nel contesto dell'accordatore, il metodo è stato applicato moltiplicando il segnale originale con le prime versioni scalate del segnale.
 L'algoritmo, inoltre, prevede di usare la tecnica di zero-padding sui segnali scalati in modo che essi vengano adattati alla lunghezza del vettore originale. 
 Questa operazione è stata evitata troncando tutte le versioni dei vettori da scalare al numero di elementi del vettore più corto.
-Ciò è stato possibile dal momento che la frequenza fondamentale più alta della chitarra è di 329.63 hz, corrispondente al \emph{mi} alto.
+Ciò è stato possibile dal momento che la frequenza fondamentale più alta della chitarra è di 329.63 hz, corrispondente al \mbox{mi} alto.
 Il segnale più corto tra quelli da moltiplicare è quello scalato con il fattore maggiore, cioè 5.
 La frequenza massima del segnale scalato si ottiene dividendo la frequenza massima del segnale, cioè 4 kHz per il fattore di compressione, 5. 
 Il risultato, 800 hz, è ben oltre il doppio dell'ottava della nota più acuta suonata dalla chitarra, quindi questa operazione è realizzata senza nessun rischio per l'individuazione della frequenza fondamentale.
 
+L'operazione di ricerca del massimo è calcolata su una versione ulteriormente finestrata della funzione prodotto. 
+In particolare, vengono escluse le frequenze inferiori ai 40 hz in quanto il rumore in questo range è molto intenso, come discusso nel capitolo \ref{cap:rumore}.
+La generalità dell'algoritmo di ricerca della frequenza non viene penalizzata, in quanto il minore delle frequenze fondamentali delle note della chitarra è di 82.41 hz, corrispondente alla sesta corda, cioè al \mbox{mi} grave.
 
-
+Il risultato del doppio finestramento può essere paragonato all'applicazione di un filtro passa-banda ideale sul segnale prodotto, con intervallo di frequenze pari a [40,800] hz.
+Si è potuto utilizzare un filtro ideale in quanto tutte le operazioni effettuate riguardano il dominio delle frequenze.
+Il segnale nel dominio del tempo, quindi, non deve essere ricostruito.
 
 
 
