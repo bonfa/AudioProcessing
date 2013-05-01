@@ -10,6 +10,20 @@ function [ input_freq ] = get_audio_main_frequency_in_guitar_domain(audio_vector
     N = round(length(fft_abs_vect)/2);
     audio_data_normalized = (fft_abs_vect(1:N+1));
 
+    % debug part
+    % plot the product with the correct freq axes
+    % 
+    % create the x axis for the interpolated vector
+    %freq_min = 0*TunerConstants.FS/(2*length(audio_data_normalized));
+    %freq_max= length(audio_data_normalized)*TunerConstants.FS/(2*length(audio_data_normalized));
+    %step_ = (freq_max-freq_min)/length(audio_data_normalized);
+    %freq_axes = freq_min:step_:freq_max;
+    %plot(freq_axes,audio_data_normalized);
+    %figure(2);ù
+    %disp(length(audio_vector));
+    %disp(length(fft_abs_vect));
+    %disp(length(audio_data_normalized));
+    %plot(audio_data_normalized);
       
     % Pitch detection - hps METHOD (3rd try)
     
