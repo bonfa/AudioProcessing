@@ -1,7 +1,7 @@
-FILENAME=thesis
+FILENAME=elaborato_bonfadelli
 SOURCES=./$(FILENAME).tex
 BIN=./$(FILENAME).pdf
-TEMP_FILES= thesis.idx thesis.log thesis.aux  thesis.lof  thesis.out thesis.toc thesis.brf thesis.blg thesis.bbl 
+TEMP_FILES= $(FILENAME).idx $(FILENAME).log $(FILENAME).aux  $(FILENAME).lof  $(FILENAME).out $(FILENAME).toc $(FILENAME).brf $(FILENAME).blg $(FILENAME).bbl 
 CC=pdflatex -shell-escape
 CC_BIB=bibtex
 
