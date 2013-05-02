@@ -1,10 +1,15 @@
 \chapter{I Parametri Fondamentali}\label{cap:parametri}
 
-La seconda operazione da effettuare per la creazione dell'accordatore è la definizione dei parametri di base, cioè la frequenza di campionamento e la durata dell'intervallo temporale.  
+La seconda operazione da effettuare per la creazione dell'accordatore è la definizione dei parametri di base, cioè la frequenza di campionamento e la durata del frammento temporale, cioè la durata temporale del segnale su cui effettuare la ricerca della frequenza fondamentale.  
 
 Uno dei requisiti fondamentali di un accordatore è la capacità di lavorare in tempo reale. 
 In questo contesto, il termine indica che il tempo trascorso tra la ricezione dell'input e la comunicazione dell'output deve essere percepito come istantaneo dall'utente. 
-Le operazioni di analisi della frequenza fondamentale della corda, calcolo della distanza tra la frequenza ottenuta e la frequenza di riferimento e comunicazione della risposta, quindi, devono essere effettuate in un intervallo temporale ridotto, il cui limite massimo è stato impostato a 1 secondo dal progettista.
+Tutte le operazioni che vanno dall'istante in cui comincia la registrazione della nota al momento in cui il software comunica la risposta devono essere realizzate in un intervallo temporale breve, il cui limite massimo è stato impostato a 1 secondo dal progettista. 
+%La durata del frammento temporale è stata impostata a 1 secondo dal progettista.
+%Le operazioni di analisi della frequenza fondamentale della corda, calcolo della distanza tra la frequenza ottenuta e la frequenza di riferimento e comunicazione della risposta, quindi, devono essere effettuate in un intervallo temporale ridotto, il cui limite massimo è stato impostato a 1 secondo dal progettista.
+
+I parametri di base vengono conseguentemente influenzati da questo requisito.
+Il frammento 
 La conseguenza di questo requisito è che la frequenza di campionamento deve essere la più piccola possibile. 
 Tenendo conto del teorema del campionamento e supponendo che l'intervallo di frequenze compreso tra 0 e \mbox{4 kHz} contenga informazione sufficiente per rilevare la frequenza fondamentale di ciascuna corda della chitarra, la minima frequenza di campionamento presa in considerazione è di 8 kHz.
 
