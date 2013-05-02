@@ -325,6 +325,8 @@ function newX = calculateNewX(handles,distance)
     panelDimension = getpixelposition(handles.frequencyAxes,true);
     panelLenght = panelDimension(3);
     
+    disp(distance);
+    
     barDimension = getpixelposition(handles.Bar,true);
     barLength = barDimension(3);
     RangeInPixel = round((panelLenght - barLength)/2);

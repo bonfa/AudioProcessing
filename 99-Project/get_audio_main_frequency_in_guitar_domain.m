@@ -73,8 +73,8 @@ function [ input_freq ] = get_audio_main_frequency_in_guitar_domain(audio_vector
         
     % create the vector that represents the frequency axes for the range
     % i-10 and i+10    
-    minimum_i = correct_i - 10;
-    maximum_i = correct_i + 10;
+    minimum_i = correct_i - 11;
+    maximum_i = correct_i + 9;
     
     % create the vector
     x = minimum_i:maximum_i;

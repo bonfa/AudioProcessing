@@ -1,4 +1,4 @@
-\chapter*{Interpolazione}\label{cap:interpolazione}
+\chapter{Interpolazione}\label{cap:interpolazione}
 
 Come accennato nel capitolo \ref{cap:parametri}, la frequenza di campionamento e il numero di campioni estratti per frame non garantiscono la precisione desiderata.
 La soluzione introdotta per aumentare tale precisione è interpolare i valori attorno al massimo trovato.
@@ -19,3 +19,12 @@ La linea verde che li congiunge, rappresenta un'interpolazione lineare.
 La linea blu che passa per tutti i punti rappresenta l'interpolazione spline realizzata al fine di trovare il massimo della funzione con una maggiore precisione.
 
 Successivamente all'interpolazione, l'operazione di ricerca del massimo viene effettuata nuovamente e l'ascissa del punto trovato viene utilizzata come frequenza della nota suonata dalla corda della chitarra.
+
+Al fine di eliminare falsi positivi, cioè massimi che possono essere rilevati in momenti in cui non si sta suonando alcuna corda tra quelle della chitarra, è fissata una soglia in ampiezza al di sotto della quale la frequenza del massimo non è ritenuta una frequenza di pitch.
+L'algoritmo \mbox{HPS} permette di distinguere nettamente il caso in cui una frequenza fondamentale è presente da quello in cui c'è solamente rumore.
+Nel primo caso infatti, la frequenza fondamentale risulta essere molto amplificata, in quanto deriva dal prodotto di 5 massimi locali nelle diverse funzioni scalate della trasformata del segnale originale.
+Nel caso del rumore, le diverse frequenze pur moltiplicandosi tra loro non subiscono tale effetto di amplificazione.
+La soglia minima al di sopra della quale la frequenza viene considerata fondamentale è fissata a 84 dB.
+Si ricorda che il segnale su cui è applicata tale soglia, è il risultato della moltiplicazione di cinque segnali, di conseguenza, in presenza di un pitch, il massimo della funzione è sempre sopra tale soglia.
+
+
