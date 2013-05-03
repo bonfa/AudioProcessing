@@ -1,9 +1,10 @@
 \chapter{L'interfaccia grafica}\label{cap:interfaccia}
 
-L'interfaccia grafica del programma permette all'utente di azionare e mettere in pausa l'accordatore e di selezionare la modalità con cui definire la frequenza di riferimento.
-È possibile infatti indicare esplicitamente la nota da prendere come riferimento oppure lasciar riconoscere all'accordatore tale frequenza in modalità automatica.
+L'interfaccia grafica del programma, oltre a offrire la possibilità di azionare e mettere in pausa l'accordatore, permette di selezionare la modalità con cui definire la frequenza di riferimento, mostra la nota corrispondente a tale frequenza e visualizza la distanza tra la frequenza del suono in input e il valore di riferimento.
+
+È possibile, infatti, indicare esplicitamente la nota da prendere come riferimento oppure lasciar riconoscere all'accordatore tale frequenza in modalità automatica.
 Questa seconda opzione risulta comoda quando le corde della chitarra sono leggermente fuori tonalità.
-In questo caso, infatti, il software riconosce facilmente la frequenza di riferimento senza la necessità che l'utente debba impostare manualmente la nuova nota di riferimento.
+In questo caso, infatti, il software riconosce facilmente la frequenza di riferimento senza la necessità che l'utente debba impostarne il valore manualmente.
 
 	\begin{figure}[h]
 	  \begin{center} 
@@ -15,11 +16,14 @@ In questo caso, infatti, il software riconosce facilmente la frequenza di riferi
 
 La figura \ref{fig:accordatore_fermo} mostra la visione che ha l'utente nel momento in cui avvia il programma.
 L'accordatore è spento, per azionarlo è necessario premere il bottone \emph{Start}, come suggerisce il messaggio nell'angolo in basso a sinistra della finestra.
+
 Al momento dell'avvio, una serie di operazioni vengono eseguite.
-Innanzitutto, il bottone di start viene disattivato e il bottone di stop viene abilitato.
-In secondo luogo, viene avviata la registrazione del suono dalla scheda audio e il timer che regola il funzionamento dell'accordatore si attiva.
-Quest'ultimo ha la funzione di chiamare la funzione di tuning una volta al secondo. 
-Tale funzione effettua le seguenti operazioni nel seguente ordine:
+Innanzitutto, viene attivato il timer che regola il funzionamento dell'accordatore.
+In secondo luogo, il software avvia la registrazione.
+Infine, l'interfaccia grafica viene modificata in modo permettere all'utente di usufruire delle funzionalità del software.
+
+Il timer ha la funzione di chiamare la funzione di tuning una volta al secondo. 
+Tale funzione effettua le seguenti operazioni:
 \begin{itemize}
 	\item fermare il registratore,
 	\item estrarre i dati registrati dal buffer del registratore,
@@ -29,7 +33,7 @@ Tale funzione effettua le seguenti operazioni nel seguente ordine:
 	\item aggiornare l'interfaccia grafica con i dati appena calcolati.
 \end{itemize}
 
-L'utente ha la possibilità di cambiare la frequenza di riferimento grazie ai bottoni che si trovano appena sopra il messaggio di aiuto.
+L'utente ha la possibilità di cambiare la frequenza di riferimento grazie ai bottoni che si trovano appena al di sopra del messaggio di aiuto.
 
 	\begin{figure}[h]
 	  \begin{center} 
@@ -39,8 +43,9 @@ L'utente ha la possibilità di cambiare la frequenza di riferimento grazie ai bo
 	  \label{fig:accordatore_in_funzione}
 	\end{figure}
 
-L'aggiornamento dell'interfaccia grafica consiste nel mostrare la nota di riferimento tra i bottoni \emph{Start} e \emph{Stop} e la barra delle frequenze e la distanza misurata tra il tuono in input e quello di riferimento. 
-In figura \ref{fig:accordatore_in_funzione}, la nota di riferimento è il LA (etichetta A) e la differenza risulta essere piuttosto significativa.
+L'aggiornamento dell'interfaccia grafica consiste nell'attivazione di tutti i bottoni e le barre. 
+Inoltre viene mostrata la nota di riferimento tra i bottoni \emph{Start} e \emph{Stop} e l'indicatore nero si muove lungo la barra delle frequenze in funzione della distanza misurata tra il suono in input e quello di riferimento. 
+In figura \ref{fig:accordatore_in_funzione}, si può vedere l'accordatore, in modalità automatica, mentre fornisce la distanza tra la frequenza della nota in ingresso e la nota di riferimento, in questo caso, LA.
 
 
 
