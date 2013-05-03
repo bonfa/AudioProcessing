@@ -2,7 +2,7 @@
 
 Come accennato nel capitolo \ref{cap:parametri}, i valori della frequenza di campionamento e del numero di campioni estratti per frame non garantiscono la precisione desiderata.
 La soluzione introdotta per aumentare tale precisione è interpolare tramite un metodo di tipo \emph{spline} i valori attorno al massimo trovato.
-L'operazione ha interessato un intorno di ventuno punti, centrati attorno al massimo della funzione.
+La funzione opera su un intorno di ventuno punti, centrato attorno al massimo della funzione.
 
 	\begin{figure}[h]
 	  \begin{center} 
@@ -14,9 +14,9 @@ L'operazione ha interessato un intorno di ventuno punti, centrati attorno al mas
 
 La figura \ref{fig:interpolazione} mostra un esempio dell'interpolazione realizzata. 
 I punti evidenziati in rosso, rappresentano il prodotto delle versioni sotto-campionate dello spettro del segnale audio.
-La linea verde che li congiunge, rappresenta un'interpolazione lineare di tali punti mentre la linea blu l'interpolazione spline, realizzata al fine di trovare il massimo della funzione con una maggiore precisione.
+La linea verde che li congiunge, rappresenta un'interpolazione lineare di tali punti mentre la linea blu l'interpolazione spline, realizzata al fine di trovare la frequenza fondamentale con una maggiore precisione.
 
-Successivamente, l'operazione di ricerca del massimo viene ripetuta sulla nuova funzione ottenuta e l'ascissa del punto trovato viene utilizzata come frequenza della nota prodotta dalla corda della chitarra.
+L'operazione di ricerca del massimo viene ripetuta sulla nuova funzione ottenuta e l'ascissa del punto trovato viene utilizzata come frequenza della nota prodotta dalla corda della chitarra.
 
 Al fine di eliminare falsi positivi, cioè massimi che possono essere rilevati in momenti in cui non si sta suonando alcuna corda tra quelle della chitarra, è fissata una soglia in ampiezza al di sotto della quale la frequenza del massimo non è ritenuta una frequenza di pitch.
 Tramite l'algoritmo \mbox{HPS} è facile distinguere quest'ultimo caso.

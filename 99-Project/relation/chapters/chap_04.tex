@@ -64,7 +64,7 @@ Di seguito si trova una descrizione dei passi principali dell'algoritmo.
 	Sostituendo i valori 4000 Hz e 5, il risultato che si ottiene è 800 Hz, che è ben oltre il doppio dell'ottava della nota più acuta suonata dalla chitarra. L'operazione di scalatura, quindi, non compromette in alcun modo la ricerca della frequenza fondamentale.
 
 	L'algoritmo, inoltre, prevede di usare la tecnica di zero-padding sui segnali scalati in modo che essi vengano adattati alla lunghezza del vettore originale. 
-	Questa operazione è stata evitata troncando tutte le versioni dei vettori scalate al numero di elementi del vettore più corto.
+	Questa operazione è stata evitata troncando tutti i vettori al numero di elementi del vettore più corto.
 	Per quanto detto precedentemente, questa operazione non lede la generalità dell'algoritmo.
 
 	L'operazione di ricerca del massimo è calcolata su una versione ulteriormente finestrata della funzione prodotto. 
