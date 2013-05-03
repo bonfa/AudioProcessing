@@ -7,7 +7,7 @@ Questi ultimi due valori dipendono a loro volta dai requisiti temporali e di pre
 
 L'algoritmo utilizzato per riconoscere la frequenza fondamentale delle note musicali si basa sull'algoritmo Harmonic Product Spectrum, che moltiplica diverse versioni scalate dello spettro del segnale e calcola una prima stima della frequenza fondamentale come massimo della funzione ottenuta.
 Per aumentare la precisione della risultato, viene effettuata un'interpolazione in un'intorno del massimo trovato.
-Una seconda operazione di massimo viene calcolata sulla funzione interpolata e il risultato risulta essere la frequenza fondamentale.
+La frequenza fondamentale risulta essere l'ascissa del massimo della funzione interpolata.
 Tale valore viene utilizzato per calcolare la distanza dalla frequenza di riferimento, che è impostata dall'utente tramite l'interfaccia grafica. 
 
 Le prestazioni del software sviluppato soddisfano le attese.
