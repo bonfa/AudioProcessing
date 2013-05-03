@@ -1,6 +1,7 @@
 \chapter{I Parametri Fondamentali}\label{cap:parametri}
 
-La seconda operazione da effettuare per la creazione dell'accordatore è la definizione dei parametri di base, cioè la frequenza di campionamento e la durata del frammento temporale, cioè la durata temporale del segnale su cui effettuare la ricerca della frequenza fondamentale.  
+La seconda operazione da effettuare per la creazione dell'accordatore è la definizione dei parametri di base, cioè la frequenza di campionamento e la durata del frammento temporale.
+Quest'ultimo rappresenta la durata temporale del segnale su cui effettuare la ricerca della frequenza fondamentale.  
 
 Uno dei requisiti fondamentali di un accordatore è la capacità di lavorare in tempo reale. 
 In questo contesto, il termine indica che il tempo trascorso tra la ricezione dell'input e la comunicazione dell'output deve essere percepito come istantaneo dall'utente. 
@@ -8,19 +9,19 @@ Tutte le operazioni che vanno dall'istante in cui comincia la registrazione dell
 %La durata del frammento temporale è stata impostata a 1 secondo dal progettista.
 %Le operazioni di analisi della frequenza fondamentale della corda, calcolo della distanza tra la frequenza ottenuta e la frequenza di riferimento e comunicazione della risposta, quindi, devono essere effettuate in un intervallo temporale ridotto, il cui limite massimo è stato impostato a 1 secondo dal progettista.
 
-Questa caratteristica richiede che il frammento temporale non superi il limite appena definito e che la frequenza di campionamento sia la più ridotta possibile per avere un numero inferiore di elementi da analizzare e rendere così più veloci le operazioni.
+Questa caratteristica richiede che il frammento temporale non superi il limite appena definito e che la frequenza di campionamento sia la più ridotta possibile per avere un numero inferiore di elementi da analizzare e rendere così più veloce l'elaborazione.
 Tenendo conto del teorema del campionamento e supponendo che l'intervallo di frequenze compreso tra 0 e \mbox{4 kHz} contenga informazione sufficiente per rilevare la frequenza fondamentale di ciascuna corda della chitarra, la minima frequenza di campionamento presa in considerazione è di 8 kHz.
 
 Il secondo fattore fondamentale di cui tenere conto nella definizione dei parametri è la precisione dell'analisi della frequenza.
-Tale misura, per l'apparato uditivo umano è data dal \emph{JND}, grandezza che rappresenta la minima variazione che la frequenza di un suono deve subire affinché il suono risultante venga percepito come distinto dall'originale.
+Tale misura, per l'apparato uditivo umano, è data dal \emph{JND}, grandezza che rappresenta la minima variazione che la frequenza di un suono deve subire affinché il suono risultante venga percepito come distinto dall'originale.
 Sarebbe desiderabile che il software abbia un \mbox{JND} pari a quello dell'orecchio umano. 
 Per toni complessi che hanno frequenza inferiore ai 500 hz il \mbox{JND} è di circa 1 hz \todo{riferimento}. 
 Dal momento che tutte le frequenze fondamentali delle corde della chitarra sono inferiori ai 500 hz, la precisione di 1 hz è considerata accettabile.
 
-Una precisione alta richiede un maggior numero di campioni da elaborare per frammento temporale. 
+Aumentare la precisione richiede l'elaborazione di un maggior numero di campioni per ciascun frammento temporale. 
 Ci sono due modi per ottenere tale effetto: aumentare la frequenza di campionamento oppure aumentare la finestra temporale.
 In entrambi i casi, aumentare la precisione dell'analisi è in contrasto con il requisito di tempo reale.
-Risulta necessario quindi fare una mediazione tra i due requisiti.
+Risulta necessario quindi effettuare una mediazione tra i due requisiti.
 
 Fissate la frequenza di campionamento e la risoluzione desiderata, il numero di campioni che è necessario analizzare viene calcolato tramite la seguente formula.
 
@@ -29,16 +30,17 @@ Fissate la frequenza di campionamento e la risoluzione desiderata, il numero di 
 \vspace{0.2cm}
 
 Sostituendo i valori di 1 hz per la risoluzione e di 8 kHz per la frequenza di campionamento, il numero di campioni risulta essere 8000. 
-Ciò determina che l'ampiezza del frame temporale deve essere di 1 secondo.
+La conseguente ampiezza del frame temporale risulta essere di 1 secondo.
 Dal momento che tali valori rispettano i requisiti, sono stati utilizzati come parametri di base per lo sviluppo del progetto.
 
 Nell'intervallo temporale definito, che, come si vedrà nel capitolo dedicato all'interfaccia grafica, è scandito da un timer, non deve essere realizzata solo l'operazione di estrazione dei campioni ma devono essere svolte anche le operazioni di analisi della frequenza del suono, di calcolo della distanza dalla frequenza fondamentale e aggiornamento dell'interfaccia grafica. 
-Queste operazioni restringono l'intervallo temporale in cui si estraggono campioni a un intervallo variabile tra 0,65 e 0,89 secondi, con la conseguente riduzione della risoluzione tra i valori 1.56 e 1,12 hz.
+Queste operazioni restringono l'intervallo temporale in cui si estraggono campioni a un intervallo variabile tra 0,65 e 0,89 secondi, con la conseguente riduzione della risoluzione tra i valori 1,56 hz e 1,12 hz.
 
-Ottenere risoluzioni maggiori a quelle determinate variando solamente frequenza di campionamento e intervallo temporale e rispettando il vincolo di tempo reale definito risulta essere molto difficoltoso. 
+Ottenere risoluzioni maggiori a quelle determinate variando i due parametri di base e rispettando il vincolo di tempo reale definito risulta essere molto difficoltoso. 
 A causa del limite di 1 secondo definito dallo sviluppatore, non è possibile estendere la finestra temporale ulteriormente.
-Aumentare la frequenza di campionamento, invece, aumenterebbe il numero di campioni da elaborare con il conseguente aumento del tempo di elaborazione e la riduzione dell'intervallo temporale su cui analizzare campioni finendo con il causare una diminuzione di risoluzione.
+Aumentare la frequenza di campionamento, invece, aumenterebbe il numero di campioni su cui effettuare operazioni. 
+Il conseguente aumento del tempo di elaborazione causerebbe dei ritardi del tempo di risposta e quindi andrebbe ancora una volta ad aumentare la durata del frammento temporale.
 
 La soluzione adottata per aumentare la risoluzione è quella dell'interpolazione.
-Questa operazione è descritta nella sezione \todo{riferimento}.
+Questa operazione è descritta nella sezione \ref{cap:interpolazione}.
 
