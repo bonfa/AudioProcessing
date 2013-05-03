@@ -88,14 +88,15 @@
 \pagenumbering{roman}
 \tableofcontents
 
-%\newpage
+\newpage
 %\thispagestyle{empty}
 %\mbox{}
 
-\input{chapters/chap_01.tex}
-
-\newpage
 \pagenumbering{arabic}
+
+\input{chapters/chap_01.tex}
+\newpage
+%\pagenumbering{arabic}
 \input{chapters/chap_02.tex}
 \newpage
 \input{chapters/chap_03.tex}
@@ -111,15 +112,14 @@
 \input{chapters/chap_08.tex}
 \newpage
 \input{chapters/chap_09.tex}
-%\pagenumbering{roman}
+
 
 
 \newpage
 \clearpage
-\appendix
-%\input{Chapters/appendice}
-\newpage
-\clearpage
+
+
+\pagenumbering{roman}
 
 
 
