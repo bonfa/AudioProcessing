@@ -21,7 +21,7 @@ Di seguito si trova una descrizione dei passi principali dell'algoritmo.
 	L'algoritmo utilizzato per rilevare la frequenza fondamentale è l'algoritmo \emph{Harmonic Product Spectrum}, abbreviato dall'acronimo \emph{HPS}.
 	Tale metodo sfrutta il fatto che quando viene prodotta una nota con uno strumento musicale, l'energia del suono si concentra principalmente nella frequenza fondamentale e nelle sue armoniche, cioè i suoi multipli interi.
 
-	L'algoritmo HPS moltiplica lo spettro del segnale con un numero \emph{K-1} di versioni differenti dello spettro.
+	L'algoritmo HPS moltiplica lo spettro del segnale con un numero \emph{K-1} di versioni differenti dello stesso.
 	Le diverse versioni sono ottenute sotto-campionando lo spettro originale con i diversi fattori compresi tra 2 e K.
 	La formula \ref{formula:hps_prod} esprime in forma matematica questo passo per un generico spettro X($\omega$) e un generico valore \emph{K}.
 
@@ -29,12 +29,22 @@ Di seguito si trova una descrizione dei passi principali dell'algoritmo.
 			Y(\omega) = \prod_{i=1}^K \left | X(\omega i) \right |
 		\end{equation}
 
-	Una volta ottenuto il prodotto Y($\omega$), la frequenza fondamentale viene calcolata come ascissa del massimo della funzione risultante. 
-	La formula \ref{formula:hps_max} descrive questo secondo passaggio.
-
 		\begin{equation}\label{formula:hps_max}
 			Y_{f0} = \max_{\omega_i} Y \left(\omega_i \right )
 		\end{equation}
+
+	Una volta ottenuto il prodotto Y($\omega$), la frequenza fondamentale viene calcolata come ascissa del massimo della funzione risultante. 
+	La formula \ref{formula:hps_max} descrive questo secondo passaggio.
+
+		
+
+	\begin{figure}[h]
+		  \begin{center} 
+		    \includegraphics[width=\textwidth*\real{0.9}]{images/ch_04/processo.jpg}
+		  \end{center} 
+		  \caption{\textit{Metodo HPS}}  
+		  \label{fig:HPS}
+		\end{figure}
 
 	In figura \ref{fig:HPS} si può vedere molto chiaramente il funzionamento dell'algoritmo. 
 	Dal momento che l'energia è concentrata nelle armoniche, tutte le versioni scalate dei segnali avranno un picco nella frequenza fondamentale. 
@@ -46,28 +56,22 @@ Di seguito si trova una descrizione dei passi principali dell'algoritmo.
 	Il segnale risultante presenta un unico picco nella frequenza fondamentale.
 	A questo punto, quindi, una semplice operazione di ricerca del massimo risulta essere sufficiente per trovare la frequenza fondamentale \cite{Cuadra01efficientpitch}.
 
-		\begin{figure}[h]
-		  \begin{center} 
-		    \includegraphics[width=\textwidth*\real{0.68}]{images/ch_04/processo.jpg}
-		  \end{center} 
-		  \caption{\textit{Metodo HPS}}  
-		  \label{fig:HPS}
-		\end{figure}
+		
 
 	Nel contesto dell'accordatore, il metodo è stato applicato moltiplicando il segnale originale con le prime quattro versioni scalate del segnale.
-	Ciò è stato possibile dal momento che la frequenza del segnale ottenuto risulta essere maggiore della frequenza più alta delle corde della chitarra, cioè 329.63 hz.
+	Ciò è stato possibile dal momento che la frequenza del segnale ottenuto risulta essere maggiore della frequenza più alta delle corde della chitarra, cioè 329.63 Hz.
 	La frequenza massima del prodotto tra i segnali, infatti, si ottiene dividendo la frequenza massima del segnale originale per il fattore massimo di scala.
-	Sostituendo i valori 4000 hz e 5, il risultato che si ottiene è 800 hz, che è ben oltre il doppio dell'ottava della nota più acuta suonata dalla chitarra. L'operazione di scalatura, quindi, non compromette in alcun modo la ricerca della frequenza fondamentale.
+	Sostituendo i valori 4000 Hz e 5, il risultato che si ottiene è 800 Hz, che è ben oltre il doppio dell'ottava della nota più acuta suonata dalla chitarra. L'operazione di scalatura, quindi, non compromette in alcun modo la ricerca della frequenza fondamentale.
 
 	L'algoritmo, inoltre, prevede di usare la tecnica di zero-padding sui segnali scalati in modo che essi vengano adattati alla lunghezza del vettore originale. 
 	Questa operazione è stata evitata troncando tutte le versioni dei vettori scalate al numero di elementi del vettore più corto.
 	Per quanto detto precedentemente, questa operazione non lede la generalità dell'algoritmo.
 
 	L'operazione di ricerca del massimo è calcolata su una versione ulteriormente finestrata della funzione prodotto. 
-	In particolare, vengono escluse le frequenze inferiori ai 40 hz in quanto il rumore in questo range è molto intenso, come discusso nel capitolo \ref{cap:rumore}.
-	La generalità dell'algoritmo di ricerca della frequenza non viene lesa da questa operazione, in quanto la frequenza fondamentale minore tra le note della chitarra è di 82.41 hz.
+	In particolare, vengono escluse le frequenze inferiori ai 40 Hz in quanto il rumore in questo range è molto intenso, come discusso nel capitolo \ref{cap:rumore}.
+	La generalità dell'algoritmo di ricerca della frequenza non viene lesa da questa operazione, in quanto la frequenza fondamentale minore tra le note della chitarra è di 82.41 Hz.
 
-	Il risultato del doppio finestramento può essere paragonato all'applicazione di un filtro passa-banda ideale sul segnale prodotto, con intervallo di frequenze pari a [40,800] hz.
+	Il risultato del doppio finestramento può essere paragonato all'applicazione di un filtro passa-banda ideale sul segnale prodotto, con intervallo di frequenze pari a [40,800] Hz.
 	Si è potuto utilizzare un filtro ideale in quanto tutte le operazioni effettuate riguardano il dominio delle frequenze.
 	Il segnale nel dominio del tempo, quindi, non deve essere ricostruito.
 

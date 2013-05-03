@@ -2,8 +2,8 @@
 
 In questa relazione viene discussa la creazione di un accordatore digitale per chitarre.
 L'operazione più importante da realizzare per raggiungere tale obiettivo è riconoscere la frequenza fondamentale delle note prodotte da una chitarra.
-Il risultato di questa operazione è influenzato dal rumore in ingresso e da due parametri fondamentali, frequenza di campionamento e dimensione del frammento temporale.
-Questi ultimi due valori dipendono a loro volta dai requisiti temporali e di precisione richiesti.
+Il risultato di questa operazione è influenzato dal rumore in ingresso e da due parametri fondamentali, la frequenza di campionamento e la dimensione del frammento temporale.
+Questi ultimi due valori dipendono a loro volta dai requisiti temporali e di precisione imposti.
 
 L'algoritmo utilizzato per riconoscere la frequenza fondamentale delle note musicali si basa sull'algoritmo Harmonic Product Spectrum, che moltiplica diverse versioni scalate dello spettro del segnale e calcola una prima stima della frequenza fondamentale come massimo della funzione ottenuta.
 Per aumentare la precisione della risultato, viene effettuata un'interpolazione in un'intorno del massimo trovato.
@@ -11,8 +11,8 @@ Una seconda operazione di massimo viene calcolata sulla funzione interpolata e i
 Tale valore viene utilizzato per calcolare la distanza dalla frequenza di riferimento, che è impostata dall'utente tramite l'interfaccia grafica. 
 
 Le prestazioni del software sviluppato soddisfano le attese.
-La sua precisione è influenzata principalmente dall'utilizzo della trasformata di Fourier discreta, che presenta un passo di discretizzazione costante nel dominio delle frequenze.
-Se si valuta la precisione dal punto di vista dell'orecchio umano, essendo essa una funzione logaritmica della frequenza, metodi con un passo di discretizzazione con questo andamento, a parità di parametri, garantiscono una precisione maggiore rispetto all'algoritmo sviluppato.
+Il funzionamento avviene in tempo reale e la precisione desiderata è stata raggiunta. 
+Organizzare in diversi thread le diverse operazioni potrebbe portare a un miglioramento delle prestazioni mantenendo fissi i parametri.
 
 
 

@@ -15,8 +15,8 @@ Tenendo conto del teorema del campionamento e supponendo che l'intervallo di fre
 Il secondo fattore fondamentale di cui tenere conto nella definizione dei parametri è la precisione dell'analisi della frequenza.
 Tale misura, per l'apparato uditivo umano, è data dal \emph{JND}, grandezza che rappresenta la minima variazione che la frequenza di un suono deve subire affinché il suono risultante venga percepito come distinto dall'originale.
 Sarebbe desiderabile che il software abbia un \mbox{JND} pari a quello dell'orecchio umano. 
-Per toni complessi che hanno frequenza inferiore ai 500 hz il \mbox{JND} è di circa 1 hz \cite{BenestySondhiHuang2008}. 
-Dal momento che tutte le frequenze fondamentali delle corde della chitarra sono inferiori ai 500 hz, la precisione di 1 hz è considerata accettabile.
+Per toni complessi che hanno frequenza inferiore ai 500 Hz il \mbox{JND} è di circa 1 Hz \cite{BenestySondhiHuang2008}. 
+Dal momento che tutte le frequenze fondamentali delle corde della chitarra sono inferiori ai 500 Hz, la precisione di 1 Hz è considerata accettabile.
 
 \begin{comment}
 Aumentare la precisione richiede l'elaborazione di un maggior numero di campioni per ciascun frammento temporale. 
@@ -25,18 +25,18 @@ In entrambi i casi, aumentare la precisione dell'analisi è in contrasto con il 
 Risulta necessario quindi effettuare una mediazione tra i due requisiti.
 \end{comment}
 
-Fissate la frequenza di campionamento e la risoluzione desiderata, il numero di campioni che è necessario analizzare viene calcolato tramite la seguente formula.
+Fissate la frequenza di campionamento e la risoluzione desiderata, il numero di campioni che è necessario analizzare viene calcolato tramite la seguente formula:
 
 \vspace{0.2cm}
 \centerline{\textit{Numero di Campioni = Frequenza di Campionamento / Risoluzione}}
 \vspace{0.2cm}
 
-Sostituendo i valori di 1 hz per la risoluzione e di 8 kHz per la frequenza di campionamento, il numero di campioni risulta essere 8000. 
+Sostituendo i valori di 1 Hz per la risoluzione e di 8 kHz per la frequenza di campionamento, il numero di campioni risulta essere 8000. 
 La conseguente ampiezza del frame temporale risulta essere di 1 secondo.
 Dal momento che tali valori rispettano i requisiti, sono stati utilizzati come parametri di base per lo sviluppo del progetto.
 
-Nell'intervallo temporale definito, che, come si vedrà nel capitolo dedicato all'interfaccia grafica, è scandito da un timer, non deve essere realizzata solo l'operazione di estrazione dei campioni ma devono essere svolte anche le operazioni di analisi della frequenza del suono, di calcolo della distanza dalla frequenza fondamentale e aggiornamento dell'interfaccia grafica. 
-Queste operazioni restringono l'intervallo temporale di estrazione dei campioni a un intervallo variabile tra 0,65 e 0,89 secondi, con la conseguente riduzione della risoluzione tra i valori 1,56 hz e 1,12 hz.
+Nell'intervallo temporale definito, che, come si vedrà nel capitolo dedicato all'interfaccia grafica, è scandito da un timer, non deve essere realizzata solo l'estrazione dei campioni ma devono essere svolte anche l'analisi della frequenza del suono, il calcolo della distanza dalla frequenza fondamentale e l'aggiornamento dell'interfaccia grafica. 
+Queste operazioni restringono l'intervallo temporale di estrazione dei campioni a un intervallo variabile tra 0,65 e 0,89 secondi, con la conseguente riduzione della risoluzione tra i valori 1,56 Hz e 1,12 Hz.
 
 Ottenere risoluzioni maggiori a quelle determinate variando i due parametri di base e rispettando il vincolo di tempo reale definito risulta essere molto difficoltoso. 
 A causa del limite di 1 secondo definito dallo sviluppatore, non è possibile estendere la finestra temporale ulteriormente.
